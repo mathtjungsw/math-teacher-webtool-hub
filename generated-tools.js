@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-06-26T10:51:37.454Z",
+  "generatedAt": "2026-06-26T21:19:21.264Z",
   "teachers": {
     "정승원": [
       {
