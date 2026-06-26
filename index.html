@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="수학교사들이 직접 제작한 수업용 웹툴 모음 페이지를 한 곳에서 찾는 통합 검색 허브입니다."
+    />
+    <title>수학교사들의 웹툴 모음</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./data.js" defer></script>
+    <script src="./generated-tools.js" defer></script>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <nav class="top-nav" aria-label="상단 메뉴">
+        <a class="brand" href="./" aria-label="수학교사들의 웹툴 모음 홈">
+          <span class="brand-mark" aria-hidden="true">Σ</span>
+          <span>Math Tools Hub</span>
+        </a>
+        <span class="nav-status">수학교사 웹툴 아카이브</span>
+      </nav>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="kicker">Teacher-Made Webtools</p>
+          <h1 id="page-title">수학교사들의 웹툴 모음</h1>
+          <p class="hero-description">
+            수학교사들이 직접 제작한 수업용 웹툴 모음 페이지를 한 곳에 모았습니다.
+          </p>
+        </div>
+
+        <div class="hero-board" aria-label="허브 요약">
+          <div>
+            <span id="teacher-total">0</span>
+            <small>교사 페이지</small>
+          </div>
+          <div>
+            <span id="tool-total">0</span>
+            <small>검색 웹툴</small>
+          </div>
+          <div>
+            <span id="tag-total">0</span>
+            <small>주제 태그</small>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main class="page-shell">
+      <section class="search-station" aria-label="검색">
+        <div class="search-card">
+          <div class="search-heading">
+            <p class="kicker">Page</p>
+            <h2>웹툴 모음 페이지 검색</h2>
+          </div>
+          <label class="search-label" for="page-search-input">교사 이름, 학교, 소개, 태그</label>
+          <div class="search-box">
+            <input
+              id="page-search-input"
+              type="search"
+              autocomplete="off"
+              placeholder="예: 웅천고, 함수, 정승원"
+            />
+            <button class="clear-search" type="button" id="clear-page-search" hidden>지우기</button>
+          </div>
+        </div>
+
+        <div class="search-card is-tool-search">
+          <div class="search-heading">
+            <p class="kicker">Tools</p>
+            <h2>웹툴 검색</h2>
+          </div>
+          <label class="search-label" for="tool-search-input">웹툴 이름, 설명, 태그, 제작 교사</label>
+          <div class="search-box">
+            <input
+              id="tool-search-input"
+              type="search"
+              autocomplete="off"
+              placeholder="예: 몬티홀, AI, 게임형 수업"
+            />
+            <button class="clear-search" type="button" id="clear-tool-search" hidden>지우기</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="filter-section" aria-labelledby="filter-title">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">Topics</p>
+            <h2 id="filter-title">주제 태그</h2>
+          </div>
+          <p class="filter-note" id="crawl-status"></p>
+        </div>
+        <div class="tag-filters" id="tag-filters" aria-label="주제 태그 필터"></div>
+      </section>
+
+      <section class="teacher-section" aria-labelledby="teacher-title">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">Teachers</p>
+            <h2 id="teacher-title">교사별 웹툴 모음 페이지</h2>
+          </div>
+          <p class="result-count" id="teacher-count" aria-live="polite"></p>
+        </div>
+
+        <div class="teacher-grid" id="teacher-grid" aria-live="polite"></div>
+
+        <p class="empty-message" id="teacher-empty" hidden>
+          조건에 맞는 교사 페이지가 없습니다. 검색어나 태그를 바꿔보세요.
+        </p>
+      </section>
+
+      <section class="tool-section" aria-labelledby="tool-title">
+        <div class="section-heading">
+          <div>
+            <p class="kicker">Search Results</p>
+            <h2 id="tool-title">웹툴 검색 결과</h2>
+          </div>
+          <p class="result-count" id="tool-count" aria-live="polite"></p>
+        </div>
+
+        <div class="tool-results" id="tool-results" aria-live="polite"></div>
+
+        <p class="empty-message" id="tool-empty" hidden>
+          조건에 맞는 웹툴이 없습니다. 검색어나 태그를 바꿔보세요.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
