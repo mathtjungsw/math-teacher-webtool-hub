@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-06-26T21:19:21.264Z",
+  "generatedAt": "2026-06-27T10:08:40.503Z",
   "teachers": {
     "정승원": [
       {
@@ -269,6 +269,18 @@ window.generatedTeacherTools = {
           "좌표평면"
         ],
         "url": "https://meerani-t.github.io/teaching-app-library/apps/trig-tank-game/index.html"
+      },
+      {
+        "title": "극한 좀비 생존전",
+        "description": "좀비가 다가오기 전에 다항·유리·무리함수의 극한값을 계산하고 레벨별 점수를 모으는 생존형 연습 게임입니다.",
+        "tags": [
+          "함수",
+          "게임형 수업",
+          "극한",
+          "좌극한",
+          "우극한"
+        ],
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/limit-zombie-game/index.html"
       }
     ],
     "김동우": [
