@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-06-27T10:08:40.503Z",
+  "generatedAt": "2026-06-27T21:03:45.210Z",
   "teachers": {
     "정승원": [
       {
@@ -125,6 +125,56 @@ window.generatedTeacherTools = {
           "게임형 수업"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/kbo-conditional-probability/index.html"
+      },
+      {
+        "title": "파일명 일괄 수정기",
+        "description": "파일관리 · 업무자동화 · 일괄수정 학교 업무용 웹툴 파일명 일괄 수정기 여러 파일과 폴더의 이름을 미리 확인하고 한 번에 바꾸는 도구입니다.",
+        "tags": [
+          "공학도구"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/school-file-renamer/index.html?manual=1"
+      },
+      {
+        "title": "파일명 일괄 수정기",
+        "description": "파일관리 · 업무자동화 · 일괄수정 학교 업무용 웹툴 파일명 일괄 수정기 여러 파일과 폴더의 이름을 미리 확인하고 한 번에 바꾸는 도구입니다.",
+        "tags": [
+          "공학도구"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/school-file-renamer/index.html"
+      },
+      {
+        "title": "문항 배점 생성기",
+        "description": "3 5 평가 · 배점 · 시험출제 학교 업무용 웹툴 문항 배점 생성기 문항 수, 총점, 선택형/서답형 점수, 상·중·하 비율을 바탕으로 배점을 자동 생성하는 도구입니다.",
+        "tags": [
+          "공학도구"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/item-score-generator/index.html?manual=1"
+      },
+      {
+        "title": "문항 배점 생성기",
+        "description": "3 5 평가 · 배점 · 시험출제 학교 업무용 웹툴 문항 배점 생성기 문항 수, 총점, 선택형/서답형 점수, 상·중·하 비율을 바탕으로 배점을 자동 생성하는 도구입니다.",
+        "tags": [
+          "공학도구"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/item-score-generator/index.html"
+      },
+      {
+        "title": "채점용 학생 과제 통합 뷰어",
+        "description": "채점 · 과제확인 · 엑셀저장 학교 업무용 웹툴 채점용 학생 과제 통합 뷰어 학생 과제 파일을 한 화면에서 확인하고 기준별 점수와 메모를 기록한 뒤 엑셀로 저장하는 도구입니다.",
+        "tags": [
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/assignment-viewer/index.html?manual=1"
+      },
+      {
+        "title": "채점용 학생 과제 통합 뷰어",
+        "description": "채점 · 과제확인 · 엑셀저장 학교 업무용 웹툴 채점용 학생 과제 통합 뷰어 학생 과제 파일을 한 화면에서 확인하고 기준별 점수와 메모를 기록한 뒤 엑셀로 저장하는 도구입니다.",
+        "tags": [
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/assignment-viewer/index.html"
       },
       {
         "title": "PDF 파일 분할기",
