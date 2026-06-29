@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-06-28T21:01:19.627Z",
+  "generatedAt": "2026-06-29T12:35:30.719Z",
   "teachers": {
     "정승원": [
       {
@@ -157,24 +157,6 @@ window.generatedTeacherTools = {
           "공학도구"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/item-score-generator/index.html"
-      },
-      {
-        "title": "채점용 학생 과제 통합 뷰어",
-        "description": "채점 · 과제확인 · 엑셀저장 학교 업무용 웹툴 채점용 학생 과제 통합 뷰어 학생 과제 파일을 한 화면에서 확인하고 기준별 점수와 메모를 기록한 뒤 엑셀로 저장하는 도구입니다.",
-        "tags": [
-          "공학도구",
-          "수업활동"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/assignment-viewer/index.html?manual=1"
-      },
-      {
-        "title": "채점용 학생 과제 통합 뷰어",
-        "description": "채점 · 과제확인 · 엑셀저장 학교 업무용 웹툴 채점용 학생 과제 통합 뷰어 학생 과제 파일을 한 화면에서 확인하고 기준별 점수와 메모를 기록한 뒤 엑셀로 저장하는 도구입니다.",
-        "tags": [
-          "공학도구",
-          "수업활동"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/assignment-viewer/index.html"
       },
       {
         "title": "PDF 파일 분할기",
