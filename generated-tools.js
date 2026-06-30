@@ -1,7 +1,19 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-06-29T21:26:43.334Z",
+  "generatedAt": "2026-06-30T10:57:04.751Z",
   "teachers": {
     "정승원": [
+      {
+        "title": "모션 샷 만들기",
+        "description": "운동 · 궤적 · 카메라 공통수학1 모션 샷 만들기 움직이는 공, 손, 사람을 여러 순간의 사진으로 합성해 위치 변화와 운동 궤적을 한눈에 관찰합니다.",
+        "tags": [
+          "확률",
+          "통계",
+          "인공지능 수학",
+          "공학도구",
+          "게임형 수업"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/motion-shot.html"
+      },
       {
         "title": "몬티홀 딜레마 실험",
         "description": "확률 실험 확률과 통계 몬티홀 딜레마 실험 선택을 유지할 때와 바꿀 때, 당첨 확률은 어떻게 달라질까요? 반복 실험으로 직관과 실제 확률을 비교합니다.",
