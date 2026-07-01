@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-01T11:23:41.112Z",
+  "generatedAt": "2026-07-01T21:28:32.058Z",
   "teachers": {
     "정승원": [
       {
@@ -169,6 +169,22 @@ window.generatedTeacherTools = {
           "공학도구"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/item-score-generator/index.html"
+      },
+      {
+        "title": "엑셀 개인자료 조회기",
+        "description": "엑셀 · 개인자료 · 브라우저 처리 학교 업무용 웹툴 엑셀 개인자료 조회기 엑셀의 key 열과 표시할 항목을 골라 필요한 개인 자료만 큰 글씨로 조회하는 교사용 도구입니다.",
+        "tags": [
+          "공학도구"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/excel-personal-viewer/index.html?manual=1&v=20260701-2"
+      },
+      {
+        "title": "엑셀 개인자료 조회기",
+        "description": "엑셀 · 개인자료 · 브라우저 처리 학교 업무용 웹툴 엑셀 개인자료 조회기 엑셀의 key 열과 표시할 항목을 골라 필요한 개인 자료만 큰 글씨로 조회하는 교사용 도구입니다.",
+        "tags": [
+          "공학도구"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/excel-personal-viewer/index.html?v=20260701-2"
       },
       {
         "title": "PDF 파일 분할기",
