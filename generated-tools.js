@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-01T21:28:32.058Z",
+  "generatedAt": "2026-07-02T10:40:23.889Z",
   "teachers": {
     "정승원": [
       {
@@ -230,6 +230,14 @@ window.generatedTeacherTools = {
           "통계"
         ],
         "url": "https://shootting.github.io/student-app/probability/bi_distcon.html"
+      },
+      {
+        "title": "종이접기로 만드는 이차곡선",
+        "description": "이차곡선 종이접기로 만드는 이차곡선 종이를 접어 점을 원(또는 직선) 위로 겹쳐가며 포물선·타원·쌍곡선이 드러나는 원리를 직접 확인합니다.",
+        "tags": [
+          "기하"
+        ],
+        "url": "https://shootting.github.io/student-app/geometry/conic_folding.html"
       }
     ],
     "백승욱": [
