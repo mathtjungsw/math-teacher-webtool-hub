@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-04T10:09:37.637Z",
+  "generatedAt": "2026-07-04T20:57:49.157Z",
   "teachers": {
     "정승원": [
       {
@@ -169,6 +169,14 @@ window.generatedTeacherTools = {
           "공학도구"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/item-score-generator/index.html"
+      },
+      {
+        "title": "성적 산출 미리 해보기",
+        "description": "1 A 성적 · 석차등급 · 성취도 학교 업무용 웹툴 성적 산출 미리 해보기 정기시험과 수행평가 점수로 환산점수, 석차등급 컷과 성취도 분포를 브라우저에서 미리 계산합니다.",
+        "tags": [
+          "공학도구"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/grade-calculator/index.html"
       },
       {
         "title": "엑셀 개인자료 조회기",
