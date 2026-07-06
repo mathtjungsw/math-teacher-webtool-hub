@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-05T20:59:57.078Z",
+  "generatedAt": "2026-07-06T12:04:41.081Z",
   "teachers": {
     "정승원": [
       {
@@ -9,7 +9,7 @@ window.generatedTeacherTools = {
           "확률",
           "통계",
           "인공지능 수학",
-          "공학도구",
+          "경제수학",
           "게임형 수업"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/motion-shot.html"
@@ -59,6 +59,16 @@ window.generatedTeacherTools = {
           "인공지능 수학"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/ai-math/trendline-prediction/index.html"
+      },
+      {
+        "title": "투자 포트폴리오 LAB",
+        "description": "자산 배분 · 위험과 수익 · 시뮬레이션 경제 수학 × 실용 경제 투자 포트폴리오 LAB 주식·채권·현금·금의 비율을 설계하고 실제 역사적 충격을 통과시키며 수익, 위험, 상관관계와 리밸런싱을 탐구합니다.",
+        "tags": [
+          "경제수학",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/economic-math/investment-portfolio/index.html"
       },
       {
         "title": "마이너스 경매",
@@ -301,6 +311,14 @@ window.generatedTeacherTools = {
         "url": "https://bsw0131.github.io/mathfactory/tools/excel-textifier.html"
       },
       {
+        "title": "워드클라우드 생성",
+        "description": "단어와 문장을 빈도에 따라 워드클라우드 이미지로 변환",
+        "tags": [
+          "공학도구"
+        ],
+        "url": "https://bsw0131.github.io/mathfactory/tools/word-cloud.html"
+      },
+      {
         "title": "카운트다운 게임",
         "description": "주어진 숫자와 사칙연산으로 목표 수에 최대한 가깝게 만들기",
         "tags": [
@@ -357,6 +375,18 @@ window.generatedTeacherTools = {
           "우극한"
         ],
         "url": "https://meerani-t.github.io/teaching-app-library/apps/limit-zombie-game/index.html"
+      },
+      {
+        "title": "퍼셉트론 손글씨 숫자 분류",
+        "description": "학생이 직접 쓴 숫자를 10 x 10 이진 행렬로 바꾸고, 퍼셉트론의 가중치와 편향 변화를 보며 숫자를 분류하는 실습입니다.",
+        "tags": [
+          "인공지능 수학",
+          "수업활동",
+          "퍼셉트론",
+          "이미지분류",
+          "손글씨"
+        ],
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/perceptron-handwriting-lab/index.html?v=20260706-phone-pdf-sheet"
       }
     ],
     "김동우": [
