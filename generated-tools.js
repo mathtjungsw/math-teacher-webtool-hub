@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-06T21:37:16.042Z",
+  "generatedAt": "2026-07-07T10:55:59.309Z",
   "teachers": {
     "정승원": [
       {
@@ -386,7 +386,7 @@ window.generatedTeacherTools = {
           "이미지분류",
           "손글씨"
         ],
-        "url": "https://meerani-t.github.io/teaching-app-library/apps/perceptron-handwriting-lab/index.html?v=20260706-phone-pdf-sheet"
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/perceptron-handwriting-lab/index.html?v=20260707-pdf-library-fix"
       }
     ],
     "김동우": [
