@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-07T21:24:11.256Z",
+  "generatedAt": "2026-07-08T10:18:23.283Z",
   "teachers": {
     "정승원": [
       {
@@ -256,6 +256,14 @@ window.generatedTeacherTools = {
           "기하"
         ],
         "url": "https://shootting.github.io/student-app/geometry/conic_folding.html"
+      },
+      {
+        "title": "크기와 방향을 가진 양",
+        "description": "a⃗ b⃗ a⃗+b⃗ 평면벡터 크기와 방향을 가진 양 벡터의 덧셈·뺄셈과 스칼라곱을 이해하고, 위치벡터와 내적의 기하학적 의미를 배웁니다.",
+        "tags": [
+          "기하"
+        ],
+        "url": "https://shootting.github.io/student-app/geometry/vector_playground.html"
       }
     ],
     "백승욱": [
