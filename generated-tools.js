@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-12T12:59:02.352Z",
+  "generatedAt": "2026-07-12T20:48:24.341Z",
   "teachers": {
     "정승원": [
       {
@@ -103,6 +103,15 @@ window.generatedTeacherTools = {
           "게임형 수업"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/set-game/index.html"
+      },
+      {
+        "title": "삼각형 그리기",
+        "description": "4 6 2 4 6 2 둔 각의 분류 수학 게임 삼각형 그리기 숫자 주사위 3개와 종류 주사위 1개를 굴려, 지정된 예각·직각·둔각삼각형을 만들고 이미 그어진 선을 피합니다.",
+        "tags": [
+          "인공지능 수학",
+          "게임형 수업"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/triangle-drawing/index.html"
       },
       {
         "title": "소수 체크 게임",
