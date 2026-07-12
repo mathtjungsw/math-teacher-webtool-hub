@@ -406,14 +406,14 @@ window.generatedTeacherTools = {
           "공학도구",
           "수업활동"
         ],
-        "url": "https://ai-math.streamlit.app/"
+        "url": "https://mathhome.streamlit.app/"
       }
     ]
   },
   "crawlErrors": [
     {
       "teacher": "김동우",
-      "url": "https://ai-math.streamlit.app/",
+      "url": "https://mathhome.streamlit.app/",
       "message": "fetch failed"
     }
   ]
