@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-12T20:48:24.341Z",
+  "generatedAt": "2026-07-13T11:10:55.021Z",
   "teachers": {
     "정승원": [
       {
@@ -88,6 +88,16 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/betting-game/index.html"
       },
       {
+        "title": "주사위 눈 합 게임",
+        "description": "2~4명의 학생이 합의 분포를 예측해 칸을 배치하고, 최대 10묶음을 던져 자동으로 X를 지우며 대량 시행 그래프까지 탐구합니다.",
+        "tags": [
+          "함수",
+          "게임형 수업",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/dice-sum-game/index.html"
+      },
+      {
         "title": "스트림스 수 추출기",
         "description": "17 수 배열 게임 수학 게임 스트림스 수 추출기 스트림스 보드게임용 숫자를 기본 덱에서 하나씩 뽑거나, 수와 카드 개수를 직접 편집해 무작위로 추출합니다.",
         "tags": [
@@ -103,6 +113,15 @@ window.generatedTeacherTools = {
           "게임형 수업"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/set-game/index.html"
+      },
+      {
+        "title": "DOUBLE 72",
+        "description": "72 DOUBLE TIME 72의 법칙 · 복리 · 시각화 탐구 경제 수학 × 금융 문해력 DOUBLE 72 다섯 가지 시각화와 역사 타임머신으로 72의 법칙을 탐구하고, 문제 풀이와 활동 보고서로 정리합니다.",
+        "tags": [
+          "경제수학",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/economic-math/double-72/index.html"
       },
       {
         "title": "삼각형 그리기",
