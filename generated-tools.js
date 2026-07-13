@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-13T11:10:55.021Z",
+  "generatedAt": "2026-07-13T20:56:46.591Z",
   "teachers": {
     "정승원": [
       {
@@ -239,6 +239,16 @@ window.generatedTeacherTools = {
           "공학도구"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/pdf-file-splitter/index.html"
+      },
+      {
+        "title": "동영상 용량 줄이기",
+        "description": "동영상 · 용량 압축 · FFmpeg 학교 업무용 웹툴 동영상 용량 줄이기 업로드 제한에 맞춰 영상의 목표 용량을 정하고 H.264 또는 H.265 2-pass 방식으로 안전하게 압축합니다.",
+        "tags": [
+          "인공지능 수학",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/video-compressor/"
       }
     ],
     "정종엽": [
