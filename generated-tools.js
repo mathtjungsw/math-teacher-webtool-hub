@@ -1,7 +1,23 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-14T09:58:16.640Z",
+  "generatedAt": "2026-07-14T20:59:40.054Z",
   "teachers": {
     "정승원": [
+      {
+        "title": "황금비 측정 실험실",
+        "description": "사진에서 두 꼭짓점을 지정해 가로세로 비율을 재고, 황금비와의 차이와 오차율을 시각적으로 탐구합니다.",
+        "tags": [
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/golden-ratio-lab/index.html?manual=1"
+      },
+      {
+        "title": "황금비 측정 실험실",
+        "description": "사진에서 두 꼭짓점을 지정해 가로세로 비율을 재고, 황금비와의 차이와 오차율을 시각적으로 탐구합니다.",
+        "tags": [
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/golden-ratio-lab/index.html"
+      },
       {
         "title": "수학자 이야기 수업관",
         "description": "고대부터 오늘까지 55명의 수학자를 카드·연표·관계망으로 탐색하고, 자료 기반 대화·인터뷰·비교·상황극으로 삶과 개념을 연결합니다.",
@@ -27,6 +43,16 @@ window.generatedTeacherTools = {
           "수업활동"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/pi-day-mission-land/index.html"
+      },
+      {
+        "title": "소리와 수학 실험실",
+        "description": "피타고라스 음계의 주파수 비를 직접 연주하고, 두 소리의 맥놀이와 보강·상쇄 간섭을 듣고 눈으로 확인합니다.",
+        "tags": [
+          "통계",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/sound-math-lab/index.html"
       },
       {
         "title": "모션 샷 만들기",
@@ -61,6 +87,32 @@ window.generatedTeacherTools = {
           "확률"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/conditional-probability/index.html"
+      },
+      {
+        "title": "표본추출 스튜디오",
+        "description": "모집단과 표본크기, 추출 방법을 바꾸며 표본평균의 흔들림과 편향, 신뢰구간의 적중률을 반복 표집으로 관찰합니다.",
+        "tags": [
+          "확률"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/sampling-studio/index.html"
+      },
+      {
+        "title": "확률 대수의 법칙 실험실",
+        "description": "동전·주사위·카드의 조건과 시행 횟수를 조절하고, 상대도수가 이론확률에 가까워지는 과정을 실시간 그래프로 비교합니다.",
+        "tags": [
+          "확률",
+          "함수",
+          "게임형 수업"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/law-of-large-numbers/index.html"
+      },
+      {
+        "title": "유전 확률 시뮬레이터",
+        "description": "두 부모의 유전자형을 교배하고 다양한 형질의 자녀 확률을 확인한 뒤, 최대 10세대 집단 변화를 시각화합니다.",
+        "tags": [
+          "확률"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/genetics-simulator/index.html"
       },
       {
         "title": "벤포드 법칙 실험기",
