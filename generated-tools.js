@@ -1,10 +1,21 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-14T20:59:40.054Z",
+  "generatedAt": "2026-07-15T10:02:34.344Z",
   "teachers": {
     "정승원": [
       {
+        "title": "테셀레이션 조각 공방",
+        "description": "변에서 조각을 잘라 평행이동·180° 반회전·미끄럼 반사로 붙여 봅니다. 대응하는 변은 자동으로 맞고 반복 무늬를 바로 확인할 수 있습니다.",
+        "tags": [
+          "인공지능 수학",
+          "경제수학",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/tessellation-lab/index.html"
+      },
+      {
         "title": "황금비 측정 실험실",
-        "description": "사진에서 두 꼭짓점을 지정해 가로세로 비율을 재고, 황금비와의 차이와 오차율을 시각적으로 탐구합니다.",
+        "description": "사진은 자유롭게 회전하고 측정선은 고정한 채, 사각형의 변 비율과 선분의 황금분할을 나누어 탐구합니다.",
         "tags": [
           "수업활동"
         ],
@@ -12,11 +23,28 @@ window.generatedTeacherTools = {
       },
       {
         "title": "황금비 측정 실험실",
-        "description": "사진에서 두 꼭짓점을 지정해 가로세로 비율을 재고, 황금비와의 차이와 오차율을 시각적으로 탐구합니다.",
+        "description": "사진은 자유롭게 회전하고 측정선은 고정한 채, 사각형의 변 비율과 선분의 황금분할을 나누어 탐구합니다.",
         "tags": [
           "수업활동"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/golden-ratio-lab/index.html"
+      },
+      {
+        "title": "포물면 반사·원뿔곡선 실험실",
+        "description": "초점과 평행광 사이의 반사 경로를 한 광선씩 관찰하고, 이중 원뿔의 절단 각도를 바꾸어 네 원뿔곡선의 경계를 찾습니다.",
+        "tags": [
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/paraboloid-conic-lab/index.html"
+      },
+      {
+        "title": "토끼와 여우 생태계 모델",
+        "description": "로트카–볼테라 미분방정식과 점화식을 같은 조건으로 계산해 개체수 그래프, 위상 평면과 최고점의 시간차를 비교합니다.",
+        "tags": [
+          "함수"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/rabbit-fox-ecosystem/index.html"
       },
       {
         "title": "수학자 이야기 수업관",
@@ -126,6 +154,23 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/benford-lab/index.html"
       },
       {
+        "title": "허프만 부호·파일 압축 실험실",
+        "description": "문자 빈도를 분석하고 가장 작은 두 묶음을 단계별로 합쳐, 허프만 부호의 생성·복원·압축률을 탐구합니다.",
+        "tags": [
+          "통계",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/ai-math/huffman-compression-lab/index.html"
+      },
+      {
+        "title": "픽셀 행렬·이미지 필터 실험실",
+        "description": "이미지를 0~255 명도 행렬로 바꾸고, 3×3 커널이 이동하며 곱하고 더하는 합성곱 계산을 한 칸씩 탐구합니다.",
+        "tags": [
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/ai-math/pixel-matrix-lab/index.html"
+      },
+      {
         "title": "이미지 지도학습 AI 만들기",
         "description": "이미지 지도학습 AI 만들기 직접 모은 이미지로 분류 모델을 학습시키고, 정확도와 혼동 행렬을 통해 모델의 판단을 살펴봅니다.",
         "tags": [
@@ -197,6 +242,24 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/streams-number-drawer/index.html"
       },
       {
+        "title": "수학 분류 카드 게임",
+        "description": "정다면체의 성질과 대수식의 종류를 클릭·드래그로 분류하고, 오답의 정답 근거까지 확인합니다.",
+        "tags": [
+          "인공지능 수학",
+          "게임형 수업"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/classification-card-game/index.html?manual=1"
+      },
+      {
+        "title": "수학 분류 카드 게임",
+        "description": "정다면체의 성질과 대수식의 종류를 클릭·드래그로 분류하고, 오답의 정답 근거까지 확인합니다.",
+        "tags": [
+          "인공지능 수학",
+          "게임형 수업"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/classification-card-game/index.html"
+      },
+      {
         "title": "SET 게임",
         "description": "SET 게임 각 속성이 모두 같거나 모두 다른 세 장을 찾습니다. 3속성 버전은 모양·색깔·투명도를 비교합니다.",
         "tags": [
@@ -247,6 +310,26 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/pig-dice/index.html"
       },
       {
+        "title": "라이어스 다이스 확률 게임",
+        "description": "숨겨진 주사위를 추정해 더 높게 입찰하거나 도전하고, 내 정보에 따른 성립 확률과 실제 결과를 비교합니다.",
+        "tags": [
+          "확률",
+          "통계",
+          "게임형 수업"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/liars-dice/index.html?manual=1"
+      },
+      {
+        "title": "라이어스 다이스 확률 게임",
+        "description": "숨겨진 주사위를 추정해 더 높게 입찰하거나 도전하고, 내 정보에 따른 성립 확률과 실제 결과를 비교합니다.",
+        "tags": [
+          "확률",
+          "통계",
+          "게임형 수업"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/liars-dice/index.html"
+      },
+      {
         "title": "파라오 코드",
         "description": "84 54 80 6 12 파라오 코드 6면·8면·12면 주사위의 수를 계산해 목표 숫자를 만들고, 난이도별 배점을 조별로 획득합니다.",
         "tags": [
@@ -271,80 +354,6 @@ window.generatedTeacherTools = {
           "게임형 수업"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/kbo-conditional-probability/index.html"
-      },
-      {
-        "title": "파일명 일괄 수정기",
-        "description": "파일명 일괄 수정기 여러 파일과 폴더의 이름을 미리 확인하고 한 번에 바꾸는 도구입니다.",
-        "tags": [
-          "공학도구"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/school-file-renamer/index.html?manual=1"
-      },
-      {
-        "title": "파일명 일괄 수정기",
-        "description": "파일명 일괄 수정기 여러 파일과 폴더의 이름을 미리 확인하고 한 번에 바꾸는 도구입니다.",
-        "tags": [
-          "공학도구"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/school-file-renamer/index.html"
-      },
-      {
-        "title": "문항 배점 생성기",
-        "description": "3 5 문항 배점 생성기 문항 수, 총점, 선택형/서답형 점수, 상·중·하 비율을 바탕으로 배점을 자동 생성하는 도구입니다.",
-        "tags": [
-          "공학도구"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/item-score-generator/index.html?manual=1"
-      },
-      {
-        "title": "문항 배점 생성기",
-        "description": "3 5 문항 배점 생성기 문항 수, 총점, 선택형/서답형 점수, 상·중·하 비율을 바탕으로 배점을 자동 생성하는 도구입니다.",
-        "tags": [
-          "공학도구"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/item-score-generator/index.html"
-      },
-      {
-        "title": "성적 산출 미리 해보기",
-        "description": "1 A 성적 산출 미리 해보기 정기시험과 수행평가 점수로 환산점수, 석차등급 컷과 성취도 분포를 브라우저에서 미리 계산합니다.",
-        "tags": [
-          "공학도구"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/grade-calculator/index.html"
-      },
-      {
-        "title": "엑셀 개인자료 조회기",
-        "description": "엑셀 개인자료 조회기 엑셀의 key 열과 표시할 항목을 골라 필요한 개인 자료만 큰 글씨로 조회하는 교사용 도구입니다.",
-        "tags": [
-          "공학도구"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/excel-personal-viewer/index.html?manual=1&v=20260701-2"
-      },
-      {
-        "title": "엑셀 개인자료 조회기",
-        "description": "엑셀 개인자료 조회기 엑셀의 key 열과 표시할 항목을 골라 필요한 개인 자료만 큰 글씨로 조회하는 교사용 도구입니다.",
-        "tags": [
-          "공학도구"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/excel-personal-viewer/index.html?v=20260701-2"
-      },
-      {
-        "title": "PDF 파일 분할기",
-        "description": "PDF PDF 파일 분할기 PDF 파일을 원하는 페이지 단위로 나누고, 분할된 PDF들을 ZIP 파일로 묶어 내려받는 브라우저 실행 도구입니다.",
-        "tags": [
-          "공학도구"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/pdf-file-splitter/index.html"
-      },
-      {
-        "title": "동영상 용량 줄이기",
-        "description": "동영상 용량 줄이기 업로드 제한에 맞춰 영상의 목표 용량을 정하고 H.264 또는 H.265 2-pass 방식으로 안전하게 압축합니다.",
-        "tags": [
-          "인공지능 수학",
-          "공학도구",
-          "수업활동"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/video-compressor/"
       }
     ],
     "정종엽": [
