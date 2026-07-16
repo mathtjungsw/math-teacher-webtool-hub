@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-16T10:08:34.581Z",
+  "generatedAt": "2026-07-16T20:57:49.083Z",
   "teachers": {
     "정승원": [
       {
@@ -191,7 +191,7 @@ window.generatedTeacherTools = {
       },
       {
         "title": "낯선 문자 찍기 확률 실험",
-        "description": "의미 없는 인공 기호를 두 선택지 중 하나로 고르고, 개인·학급 점수를 이항분포와 10,000회 모의실험에 비교합니다.",
+        "description": "아랍어부터 고대 이집트 상형문자·산스크리트어·수메르 설형문자까지 낯선 단어 뜻을 찍고, 점수를 이항분포와 비교합니다.",
         "tags": [
           "확률"
         ],
