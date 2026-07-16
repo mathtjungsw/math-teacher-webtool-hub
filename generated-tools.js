@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-15T21:00:06.066Z",
+  "generatedAt": "2026-07-16T10:08:34.581Z",
   "teachers": {
     "정승원": [
       {
@@ -63,6 +63,24 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/escape-room-maker/index.html"
       },
       {
+        "title": "미적분 보드게임 제작기",
+        "description": "모둠이 이동 보드와 미적분 카드 덱, 턴 규칙을 직접 만들고 2~6개 말로 오류와 재미를 플레이 테스트합니다.",
+        "tags": [
+          "함수",
+          "게임형 수업"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/calculus-board-game-maker/index.html?manual=1"
+      },
+      {
+        "title": "미적분 보드게임 제작기",
+        "description": "모둠이 이동 보드와 미적분 카드 덱, 턴 규칙을 직접 만들고 2~6개 말로 오류와 재미를 플레이 테스트합니다.",
+        "tags": [
+          "함수",
+          "게임형 수업"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/calculus-board-game-maker/index.html"
+      },
+      {
         "title": "파이데이 미션랜드",
         "description": "파이 암기·다트·원주율 추정·계산 퀴즈·빙고·교실 팀전을 한데 모은 파이데이 행사 종합 도구입니다.",
         "tags": [
@@ -101,6 +119,15 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/optimal-stopping/index.html"
       },
       {
+        "title": "길찾기 확률 실험실",
+        "description": "최단 완성 경로를 균등하게 뽑을 때와 갈림길마다 방향을 균등하게 뽑을 때, B를 지날 확률이 왜 달라지는지 탐구합니다.",
+        "tags": [
+          "확률",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/path-probability-lab/index.html"
+      },
+      {
         "title": "몬티홀 딜레마 실험",
         "description": "몬티홀 딜레마 실험 선택을 유지할 때와 바꿀 때, 당첨 확률은 어떻게 달라질까요? 반복 실험으로 직관과 실제 확률을 비교합니다.",
         "tags": [
@@ -117,12 +144,40 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/conditional-probability/index.html"
       },
       {
+        "title": "동가능성 탐정",
+        "description": "겉으로 같은 수의 결과가 정말 같은 확률인지, 다섯 역사적 사건의 표본공간과 미시적 가중치를 추적합니다.",
+        "tags": [
+          "확률",
+          "기하"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/equiprobability-detective/index.html"
+      },
+      {
+        "title": "자율주행 베이즈 위치 추정 실험실",
+        "description": "움직임 예측과 센서 관측을 반복해 모든 위치의 확률을 갱신하고, 1차원 도로와 2차원 도시에서 불확실성을 추적합니다.",
+        "tags": [
+          "확률",
+          "통계"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/bayes-localization-lab/index.html"
+      },
+      {
         "title": "표본추출 스튜디오",
         "description": "모집단과 표본크기, 추출 방법을 바꾸며 표본평균의 흔들림과 편향, 신뢰구간의 적중률을 반복 표집으로 관찰합니다.",
         "tags": [
-          "확률"
+          "확률",
+          "통계"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/sampling-studio/index.html"
+      },
+      {
+        "title": "그래프 프레이밍·왜곡 실험실",
+        "description": "같은 통계 자료의 축, 범위, 신뢰구간, 집단, 응답 범주와 선 스타일을 바꾸며 그래프의 인상이 달라지는 이유를 근거로 찾습니다.",
+        "tags": [
+          "통계",
+          "함수"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/graph-framing-lab/index.html"
       },
       {
         "title": "확률 대수의 법칙 실험실",
@@ -133,6 +188,14 @@ window.generatedTeacherTools = {
           "게임형 수업"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/law-of-large-numbers/index.html"
+      },
+      {
+        "title": "낯선 문자 찍기 확률 실험",
+        "description": "의미 없는 인공 기호를 두 선택지 중 하나로 고르고, 개인·학급 점수를 이항분포와 10,000회 모의실험에 비교합니다.",
+        "tags": [
+          "확률"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/symbol-guessing-lab/index.html"
       },
       {
         "title": "유전 확률 시뮬레이터",
@@ -154,6 +217,22 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/benford-lab/index.html"
       },
       {
+        "title": "단어 벡터 놀이터",
+        "description": "단어 점을 움직이고 짧은 말뭉치의 동시출현 행렬을 만들어, 거리·내적·코사인 유사도·벡터 연산과 군집을 탐구합니다.",
+        "tags": [
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/ai-math/word-vector-playground/index.html"
+      },
+      {
+        "title": "이상 징후 탐지 연구소",
+        "description": "합성 자료를 먼저 관찰해 이상점을 고르고, 임계값에 따른 혼동행렬·평가 지표·오류 비용의 변화를 비교합니다.",
+        "tags": [
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/anomaly-detection-lab/index.html"
+      },
+      {
         "title": "허프만 부호·파일 압축 실험실",
         "description": "문자 빈도를 분석하고 가장 작은 두 묶음을 단계별로 합쳐, 허프만 부호의 생성·복원·압축률을 탐구합니다.",
         "tags": [
@@ -169,6 +248,33 @@ window.generatedTeacherTools = {
           "수업활동"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/ai-math/pixel-matrix-lab/index.html"
+      },
+      {
+        "title": "평점 기반 추천 알고리즘 실험실",
+        "description": "사용자×콘텐츠 평점 행렬에서 유사도와 가중평균으로 빈칸을 예측하고, 추천 순위·오차·희소성·콜드스타트·인기 편향을 비교합니다.",
+        "tags": [
+          "통계",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/ai-math/rating-recommendation-lab/index.html?manual=1"
+      },
+      {
+        "title": "평점 기반 추천 알고리즘 실험실",
+        "description": "사용자×콘텐츠 평점 행렬에서 유사도와 가중평균으로 빈칸을 예측하고, 추천 순위·오차·희소성·콜드스타트·인기 편향을 비교합니다.",
+        "tags": [
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/ai-math/rating-recommendation-lab/index.html"
+      },
+      {
+        "title": "AI 데이터 편향 탐정",
+        "description": "합성 카드의 숨은 상관관계를 찾아 반사실적 시험으로 지름길 학습을 드러내고, 반례·균형화·특징 제거로 고칩니다.",
+        "tags": [
+          "통계",
+          "인공지능 수학",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/ai-math/ai-data-bias-detective/index.html"
       },
       {
         "title": "이미지 지도학습 AI 만들기",
@@ -249,111 +355,6 @@ window.generatedTeacherTools = {
           "게임형 수업"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/classification-card-game/index.html?manual=1"
-      },
-      {
-        "title": "수학 분류 카드 게임",
-        "description": "정다면체의 성질과 대수식의 종류를 클릭·드래그로 분류하고, 오답의 정답 근거까지 확인합니다.",
-        "tags": [
-          "인공지능 수학",
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/classification-card-game/index.html"
-      },
-      {
-        "title": "SET 게임",
-        "description": "SET 게임 각 속성이 모두 같거나 모두 다른 세 장을 찾습니다. 3속성 버전은 모양·색깔·투명도를 비교합니다.",
-        "tags": [
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/set-game/index.html"
-      },
-      {
-        "title": "DOUBLE 72",
-        "description": "72 DOUBLE TIME DOUBLE 72 다섯 가지 시각화와 역사 타임머신으로 72의 법칙을 탐구하고, 문제 풀이와 활동 보고서로 정리합니다.",
-        "tags": [
-          "수업활동"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/economic-math/double-72/index.html"
-      },
-      {
-        "title": "삼각형 그리기",
-        "description": "4 6 2 4 6 2 둔 삼각형 그리기 숫자 주사위 3개와 종류 주사위 1개를 굴려, 지정된 예각·직각·둔각삼각형을 만들고 이미 그어진 선을 피합니다.",
-        "tags": [
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/triangle-drawing/index.html"
-      },
-      {
-        "title": "소수 체크 게임",
-        "description": "? 37 41 43 소수 체크 게임 25칸 숫자판에서 소수를 찾는 대학전쟁식 게임입니다. 2의 배수와 5의 배수를 제외하고 소수 9개가 나오도록 보드를 생성합니다.",
-        "tags": [
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/prime-check-battle/index.html"
-      },
-      {
-        "title": "숫자 야구",
-        "description": "3자리 또는 4자리 비밀 숫자를 추리하고, 매 시도마다 줄어드는 경우의 수와 다음 판정의 확률을 확인합니다.",
-        "tags": [
-          "확률"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/number-baseball/index.html"
-      },
-      {
-        "title": "돼지 주사위 게임",
-        "description": "돼지 주사위 게임 계속 굴릴지 멈출지 선택하며 확률과 기대값을 탐구하고, 다양한 변형 규칙으로 전략을 비교합니다.",
-        "tags": [
-          "확률",
-          "게임형 수업",
-          "수업활동"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/pig-dice/index.html"
-      },
-      {
-        "title": "라이어스 다이스 확률 게임",
-        "description": "숨겨진 주사위를 추정해 더 높게 입찰하거나 도전하고, 내 정보에 따른 성립 확률과 실제 결과를 비교합니다.",
-        "tags": [
-          "확률",
-          "통계",
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/liars-dice/index.html?manual=1"
-      },
-      {
-        "title": "라이어스 다이스 확률 게임",
-        "description": "숨겨진 주사위를 추정해 더 높게 입찰하거나 도전하고, 내 정보에 따른 성립 확률과 실제 결과를 비교합니다.",
-        "tags": [
-          "확률",
-          "통계",
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/liars-dice/index.html"
-      },
-      {
-        "title": "파라오 코드",
-        "description": "84 54 80 6 12 파라오 코드 6면·8면·12면 주사위의 수를 계산해 목표 숫자를 만들고, 난이도별 배점을 조별로 획득합니다.",
-        "tags": [
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/pharaoh-code/index.html"
-      },
-      {
-        "title": "독점 보드게임",
-        "description": "월 1조 2조 3조 1 A A B 2 C B A +140 +20 -40 독점 보드게임 3~8팀이 12개월 동안 A, B, C 가격을 선택하고 조합별 순이익을 누적하며 제약 조건을 관리하는 가격 결정 게임입니다.",
-        "tags": [
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/monopoly-pricing-game/index.html"
-      },
-      {
-        "title": "야구 게임 시뮬레이터",
-        "description": "야구 게임 시뮬레이터 2025 KBO 타자 데이터로 라인업을 구성하고 9이닝 모의 경기에서 조건부 확률을 생생하게 확인합니다.",
-        "tags": [
-          "확률",
-          "통계",
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/kbo-conditional-probability/index.html"
       }
     ],
     "정종엽": [
