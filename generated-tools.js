@@ -1,13 +1,27 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-19T09:51:30.589Z",
+  "generatedAt": "2026-07-19T13:16:53.912Z",
   "teachers": {
     "정승원": [
+      {
+        "title": "접고 · 뚫고 · 펼치는 대칭 실험실",
+        "description": "정사각형 종이를 접고 한 번 뚫거나 직선으로 자른 뒤, 역순으로 펼치며 생기는 반사상과 중복을 단계별로 탐구합니다.",
+        "tags": [
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/fold-punch-lab/index.html?manual=1"
+      },
+      {
+        "title": "접고 · 뚫고 · 펼치는 대칭 실험실",
+        "description": "정사각형 종이를 접고 한 번 뚫거나 직선으로 자른 뒤, 역순으로 펼치며 생기는 반사상과 중복을 단계별로 탐구합니다.",
+        "tags": [
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/fold-punch-lab/index.html"
+      },
       {
         "title": "테셀레이션 조각 공방",
         "description": "변에서 조각을 잘라 평행이동·180° 반회전·미끄럼 반사로 붙여 봅니다. 대응하는 변은 자동으로 맞고 반복 무늬를 바로 확인할 수 있습니다.",
         "tags": [
-          "인공지능 수학",
-          "경제수학",
           "공학도구",
           "수업활동"
         ],
@@ -101,12 +115,30 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/sound-math-lab/index.html"
       },
       {
+        "title": "도형 리듬 시퀀서",
+        "description": "회전하는 반직선이 정다각형의 꼭짓점을 지날 때 나는 소리로 최대공약수·최소공배수·공통 방향과 주기를 탐구합니다.",
+        "tags": [
+          "기하",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/geometry-rhythm-sequencer/index.html?manual=1"
+      },
+      {
+        "title": "도형 리듬 시퀀서",
+        "description": "회전하는 반직선이 정다각형의 꼭짓점을 지날 때 나는 소리로 최대공약수·최소공배수·공통 방향과 주기를 탐구합니다.",
+        "tags": [
+          "기하",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/middle-school/geometry-rhythm-sequencer/index.html"
+      },
+      {
         "title": "모션 샷 만들기",
         "description": "모션 샷 만들기 움직이는 공, 손, 사람을 여러 순간의 사진으로 합성해 위치 변화와 운동 궤적을 한눈에 관찰합니다.",
         "tags": [
-          "함수",
-          "확률",
-          "통계"
+          "기하",
+          "게임형 수업",
+          "수업활동"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/motion-shot.html"
       },
@@ -114,6 +146,7 @@ window.generatedTeacherTools = {
         "title": "내 짝은 몇 번째일까?",
         "description": "몇 명까지 관찰하고 언제 선택해야 할까요? 37% 법칙을 직접 조작하고 반복 실험과 경우의 수로 검증합니다.",
         "tags": [
+          "기하",
           "공학도구"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/probability-statistics/optimal-stopping/index.html"
@@ -319,42 +352,6 @@ window.generatedTeacherTools = {
           "게임형 수업"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/minus-auction/index.html"
-      },
-      {
-        "title": "베팅 게임",
-        "description": "베팅 게임 숫자 선택과 중복 규칙 속에서 기대값을 생각하고, 라운드마다 전략을 수정하는 모둠 확률 게임입니다.",
-        "tags": [
-          "확률",
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/betting-game/index.html"
-      },
-      {
-        "title": "주사위 눈 합 게임",
-        "description": "2~4명의 학생이 합의 분포를 예측해 칸을 배치하고, 최대 10묶음을 던져 자동으로 X를 지우며 대량 시행 그래프까지 탐구합니다.",
-        "tags": [
-          "함수",
-          "게임형 수업",
-          "수업활동"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/dice-sum-game/index.html"
-      },
-      {
-        "title": "스트림스 수 추출기",
-        "description": "17 스트림스 수 추출기 스트림스 보드게임용 숫자를 기본 덱에서 하나씩 뽑거나, 수와 카드 개수를 직접 편집해 무작위로 추출합니다.",
-        "tags": [
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/streams-number-drawer/index.html"
-      },
-      {
-        "title": "수학 분류 카드 게임",
-        "description": "정다면체의 성질과 대수식의 종류를 클릭·드래그로 분류하고, 오답의 정답 근거까지 확인합니다.",
-        "tags": [
-          "인공지능 수학",
-          "게임형 수업"
-        ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/classification-card-game/index.html?manual=1"
       }
     ],
     "정종엽": [
