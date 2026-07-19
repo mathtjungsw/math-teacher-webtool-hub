@@ -45,6 +45,10 @@ function getGeneratedTools(teacher) {
   return Array.isArray(tools) ? tools : [];
 }
 
+function getTeacherCrawlStats(teacher) {
+  return window.generatedTeacherTools?.crawlStats?.[teacher.name] || null;
+}
+
 function getTeacherTools(teacher) {
   const generatedTools = getGeneratedTools(teacher);
   const fallbackTools = teacher.tools || [];
@@ -166,6 +170,25 @@ function renderTags(tags, className = "tag") {
   return (tags || []).map((tag) => `<span class="${className}">${escapeHtml(tag)}</span>`).join("");
 }
 
+function renderTeacherCrawlStatus(teacher) {
+  const stats = getTeacherCrawlStats(teacher);
+  if (!stats) return "";
+
+  const errorCount = Array.isArray(stats.pageErrors) ? stats.pageErrors.length : 0;
+  const isHealthy = stats.status === "success";
+  const isFallback = stats.status === "fallback";
+  const label = isHealthy
+    ? `수집 확인 ${stats.count}개`
+    : isFallback
+      ? `자동 탐색 제한 · 수동 등록 ${stats.count}개`
+      : `링크 확인 필요 ${errorCount}개`;
+  const detail = `${stats.pagesVisited || 0}개 페이지 탐색${errorCount ? ` · ${errorCount}개 페이지 응답 오류` : ""}`;
+
+  return `<p class="teacher-crawl-status ${isHealthy ? "is-success" : "is-warning"}" title="${escapeHtml(detail)}">
+    <span aria-hidden="true"></span>${escapeHtml(label)}
+  </p>`;
+}
+
 function renderTeacherCard(teacher) {
   const isReady = hasReadyUrl(teacher.url);
   const tools = getTeacherTools(teacher);
@@ -183,6 +206,7 @@ function renderTeacherCard(teacher) {
         </div>
         <h3>${escapeHtml(teacher.name)}</h3>
         <p class="teacher-description">${escapeHtml(teacher.description)}</p>
+        ${renderTeacherCrawlStatus(teacher)}
         <div class="teacher-tags" aria-label="${escapeHtml(teacher.name)} 주요 주제 태그">
           ${renderTags(teacher.tags, "teacher-tag")}
         </div>
@@ -240,7 +264,15 @@ function renderSummary() {
   tagTotal.textContent = window.tagFilters.length;
 
   const generatedAt = window.generatedTeacherTools?.generatedAt;
-  crawlStatus.textContent = generatedAt ? `자동 수집 ${new Date(generatedAt).toLocaleDateString("ko-KR")}` : "";
+  const crawlStats = Object.values(window.generatedTeacherTools?.crawlStats || {});
+  const healthyCount = crawlStats.filter((stats) => stats.status === "success").length;
+  const warningCount = crawlStats.filter((stats) => stats.status !== "success").length;
+  const healthText = crawlStats.length
+    ? ` · ${healthyCount}명 정상${warningCount ? ` · ${warningCount}명 확인 필요` : ""}`
+    : "";
+  crawlStatus.textContent = generatedAt
+    ? `자동 수집 ${new Date(generatedAt).toLocaleDateString("ko-KR")}${healthText}`
+    : "";
 }
 
 function updateSearchMode() {

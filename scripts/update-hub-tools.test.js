@@ -4,6 +4,9 @@ const test = require("node:test");
 const {
   extractAppsFromJavaScript,
   extractCardToolsFromHtml,
+  extractCandidatesFromHtml,
+  getCandidateKey,
+  normalizeIdentityUrl,
   shouldFollow,
 } = require("./update-hub-tools.js");
 
@@ -45,6 +48,42 @@ test("does not treat an ordinary interface panel as a webtool card", () => {
   const tools = extractCardToolsFromHtml(html, teacher, "https://example.com/tool.html");
 
   assert.deepEqual(tools, []);
+});
+
+test("extracts article tool cards and prefers the launch link over a manual", () => {
+  const html = `
+    <article class="tool-card" data-tool-tags="probability-statistics probability simulation class-use">
+      <div class="tool-content">
+        <h3>Monty Hall Lab</h3>
+        <p>Run the probability experiment.</p>
+        <a class="guide-link" href="./monty/index.html?manual=1">Manual</a>
+        <a href="./monty/index.html">Open</a>
+      </div>
+    </article>
+  `;
+
+  const tools = extractCardToolsFromHtml(html, teacher, "https://example.com/index.html");
+
+  assert.equal(tools.length, 1);
+  assert.equal(tools[0].url, "https://example.com/monty/index.html");
+  assert.equal(tools[0]._kind, "tool-card");
+  assert.ok(tools[0].tags.includes("확률"));
+  assert.ok(tools[0].tags.includes("수업활동"));
+});
+
+test("ignores unresolved template URLs", () => {
+  const html = `<a href="./downloads/\${CONVERTER_DOWNLOAD_URL}">Download converter</a>`;
+  const tools = extractCandidatesFromHtml(html, teacher, "https://example.com/tool/index.html");
+
+  assert.deepEqual(tools, []);
+});
+
+test("deduplicates manual and cache query variants", () => {
+  const direct = "https://example.com/tool/index.html";
+  const manual = "https://example.com/tool/index.html?manual=1&v=20260719&utm_source=hub";
+
+  assert.equal(normalizeIdentityUrl(manual), direct);
+  assert.equal(getCandidateKey({ title: "Tool", url: manual }), getCandidateKey({ title: "Tool", url: direct }));
 });
 
 test("follows same-site pages through two link levels only", () => {

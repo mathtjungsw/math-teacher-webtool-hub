@@ -466,6 +466,34 @@ h1 {
   font-weight: 700;
 }
 
+.teacher-crawl-status {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 7px;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.teacher-crawl-status span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #20a451;
+  box-shadow: 0 0 0 4px rgba(32, 164, 81, 0.12);
+}
+
+.teacher-crawl-status.is-warning {
+  color: #a65312;
+}
+
+.teacher-crawl-status.is-warning span {
+  background: #e47b19;
+  box-shadow: 0 0 0 4px rgba(228, 123, 25, 0.14);
+}
+
 .teacher-tags,
 .tool-tags {
   display: flex;

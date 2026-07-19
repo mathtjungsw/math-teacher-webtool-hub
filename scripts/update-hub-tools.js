@@ -5,9 +5,20 @@ const vm = require("node:vm");
 const ROOT_DIR = path.resolve(__dirname, "..");
 const DATA_PATH = path.join(ROOT_DIR, "data.js");
 const OUTPUT_PATH = path.join(ROOT_DIR, "generated-tools.js");
-const MAX_TOOLS_PER_TEACHER = 40;
+const MAX_TOOLS_PER_TEACHER = 200;
 const MAX_CRAWL_DEPTH = 2;
-const MAX_PAGES_PER_TEACHER = 80;
+const MAX_PAGES_PER_TEACHER = 250;
+
+const IDENTITY_QUERY_PARAMS = new Set([
+  "manual",
+  "v",
+  "ver",
+  "version",
+  "cache",
+  "cachebust",
+  "cb",
+  "_",
+]);
 
 const SKIP_TEXT = new Set([
   "홈",
@@ -43,6 +54,18 @@ const TAG_KEYWORDS = [
   ["공학도구", ["도구", "웹도구", "공학", "시뮬레이션", "엑셀", "변환"]],
   ["게임형 수업", ["게임", "숫자야구", "주사위", "경매"]],
   ["수업활동", ["수업", "활동", "탐구", "교실", "학생", "학습"]],
+];
+
+const TAG_ATTRIBUTE_KEYWORDS = [
+  ["확률", ["probability", "conditional-probability"]],
+  ["통계", ["statistics", "data-analysis"]],
+  ["기하", ["geometry", "coordinate-geometry", "shape"]],
+  ["함수", ["function", "calculus", "limit", "derivative", "integral"]],
+  ["인공지능 수학", ["ai", "ai-math", "machine-learning"]],
+  ["경제수학", ["economic-math", "economics", "finance"]],
+  ["공학도구", ["simulation", "visualization", "engineering-tool", "school-work", "work-automation"]],
+  ["게임형 수업", ["game", "math-game"]],
+  ["수업활동", ["class-use", "class-activity"]],
 ];
 
 function loadTeachers() {
@@ -156,6 +179,19 @@ function inferTags(text, teacherTags) {
   return [...tags].slice(0, 5);
 }
 
+function inferTagsFromAttributes(value) {
+  const slugs = new Set(String(value || "").toLowerCase().split(/\s+/).filter(Boolean));
+  const tags = [];
+
+  for (const [tag, keywords] of TAG_ATTRIBUTE_KEYWORDS) {
+    if (keywords.some((keyword) => [...slugs].some((slug) => (
+      slug === keyword || slug.startsWith(`${keyword}-`) || slug.endsWith(`-${keyword}`)
+    )))) tags.push(tag);
+  }
+
+  return tags;
+}
+
 function isHtmlLikeUrl(url) {
   const parsed = new URL(url);
   const basename = parsed.pathname.split("/").pop() || "";
@@ -167,6 +203,24 @@ function normalizeUrl(url) {
   const parsed = new URL(url);
   parsed.hash = "";
   return parsed.href;
+}
+
+function normalizeIdentityUrl(url) {
+  const parsed = new URL(normalizeUrl(url));
+
+  for (const key of [...parsed.searchParams.keys()]) {
+    if (IDENTITY_QUERY_PARAMS.has(key.toLowerCase()) || key.toLowerCase().startsWith("utm_")) {
+      parsed.searchParams.delete(key);
+    }
+  }
+
+  parsed.searchParams.sort();
+  return parsed.href.replace(/\/$/, "");
+}
+
+function getPreferredToolUrl(url) {
+  if (!url || url === "#") return "#";
+  return normalizeIdentityUrl(url);
 }
 
 function normalizePathname(url) {
@@ -216,6 +270,7 @@ function extractCandidatesFromHtml(html, teacher, pageUrl) {
   for (const match of html.matchAll(anchorPattern)) {
     const href = getAttribute(match[1], "href");
     if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) continue;
+    if (href.includes("${") || /%7b|%7d/i.test(href)) continue;
 
     let url;
     try {
@@ -275,10 +330,60 @@ function extractDivBlocksByClass(html, className) {
   return blocks;
 }
 
+function extractElementBlocksByClass(html, className) {
+  const blocks = [];
+  const openPattern = /<(div|article)\b[^>]*>/gi;
+
+  for (const openMatch of html.matchAll(openPattern)) {
+    if (!getClassNames(openMatch[0]).includes(className)) continue;
+
+    const tagName = openMatch[1].toLowerCase();
+    const tokenPattern = new RegExp(`<${tagName}\\b[^>]*>|<\\/${tagName}\\s*>`, "gi");
+    tokenPattern.lastIndex = (openMatch.index || 0) + openMatch[0].length;
+    let depth = 1;
+    let closeMatch;
+
+    while ((closeMatch = tokenPattern.exec(html))) {
+      depth += new RegExp(`^<${tagName}\\b`, "i").test(closeMatch[0]) ? 1 : -1;
+      if (depth === 0) {
+        blocks.push({
+          openTag: openMatch[0],
+          html: html.slice((openMatch.index || 0) + openMatch[0].length, closeMatch.index),
+        });
+        break;
+      }
+    }
+  }
+
+  return blocks;
+}
+
+function chooseCardLink(cardHtml) {
+  const links = [];
+  const anchorPattern = /<a\b([^>]*)>([\s\S]*?)<\/a>/gi;
+
+  for (const match of cardHtml.matchAll(anchorPattern)) {
+    const href = getAttribute(match[1], "href");
+    if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) continue;
+    if (href.includes("${") || /%7b|%7d/i.test(href)) continue;
+
+    const classNames = getAttribute(match[1], "class").split(/\s+/);
+    const isGuide = classNames.includes("guide-link") || /(?:^|[?&])manual=1(?:&|$)/i.test(href);
+    links.push({ href, isGuide });
+  }
+
+  return links.find((link) => !link.isGuide)?.href || links[0]?.href || "";
+}
+
 function extractCardToolsFromHtml(html, teacher, pageUrl) {
   const tools = [];
+  const explicitToolCards = extractElementBlocksByClass(html, "tool-card");
+  const cards = explicitToolCards.length
+    ? explicitToolCards
+    : extractDivBlocksByClass(html, "card").map((cardHtml) => ({ openTag: "", html: cardHtml }));
 
-  for (const cardHtml of extractDivBlocksByClass(html, "card")) {
+  for (const card of cards) {
+    const cardHtml = card.html;
     const title = firstMatchText(cardHtml, /<h[1-4][^>]*>([\s\S]*?)<\/h[1-4]>/i) || firstMatchText(cardHtml, /<strong[^>]*>([\s\S]*?)<\/strong>/i);
     if (!title || SKIP_TEXT.has(canonical(title)) || GENERIC_TEXT.has(canonical(title))) continue;
 
@@ -289,8 +394,7 @@ function extractCardToolsFromHtml(html, teacher, pageUrl) {
     const tagText =
       firstMatchText(cardHtml, /<span[^>]*class=["'][^"']*(?:card-tag|tool-badge|tag)[^"']*["'][^>]*>([\s\S]*?)<\/span>/i) ||
       "";
-    const anchorMatch = cardHtml.match(/<a\b([^>]*)>/i);
-    const href = anchorMatch ? getAttribute(anchorMatch[1], "href") : "";
+    const href = chooseCardLink(cardHtml);
     const pendingLabel =
       firstMatchText(cardHtml, /<(?:span|button)[^>]*class=["'][^"']*(?:btn-wip|is-disabled|coming-soon)[^"']*["'][^>]*>([\s\S]*?)<\/(?:span|button)>/i) ||
       "";
@@ -306,15 +410,17 @@ function extractCardToolsFromHtml(html, teacher, pageUrl) {
       }
     }
 
-    const tags = inferTags(`${title} ${description} ${tagText}`, teacher.tags);
-    if (tagText && !tags.includes(tagText)) tags.unshift(tagText);
+    const structuredTags = inferTagsFromAttributes(getAttribute(card.openTag, "data-tool-tags"));
+    const inferredTags = inferTags(`${title} ${description} ${tagText}`, teacher.tags);
+    const tags = [...new Set([...structuredTags, ...inferredTags])].slice(0, 5);
+    if (tagText && !tags.includes(tagText) && !explicitToolCards.length) tags.unshift(tagText);
 
     tools.push({
       title,
       description,
       tags: tags.length ? tags.slice(0, 5) : (teacher.tags || []).slice(0, 3),
       url,
-      _kind: "card",
+      _kind: explicitToolCards.length ? "tool-card" : "card",
     });
   }
 
@@ -496,7 +602,7 @@ function getCandidateKey(candidate) {
   }
 
   try {
-    return normalizeUrl(candidate.url).replace(/\/$/, "");
+    return normalizeIdentityUrl(candidate.url);
   } catch {
     return `${canonical(candidate.title)}:${candidate.url}`;
   }
@@ -520,7 +626,7 @@ function extractPageCandidates(html, teacher, pageUrl) {
 }
 
 function isExternalToolCandidate(candidate, teacher, depth) {
-  if (depth === 0 || candidate._kind !== "card" || !candidate.url || candidate.url === "#") {
+  if (depth === 0 || !["card", "tool-card"].includes(candidate._kind) || !candidate.url || candidate.url === "#") {
     return false;
   }
 
@@ -535,7 +641,7 @@ function mergeTool(tools, seen, tool) {
     title: tool.title,
     description: tool.description,
     tags: tool.tags || [],
-    url: tool.url || "#",
+    url: getPreferredToolUrl(tool.url || "#"),
   };
   const urlKey = getCandidateKey(cleanTool);
 
@@ -551,11 +657,12 @@ async function crawlTeacherTools(teacher) {
   const visited = new Set();
   const seenTools = new Set();
   const tools = [];
+  const pageErrors = [];
 
   while (queue.length && tools.length < MAX_TOOLS_PER_TEACHER && visited.size < MAX_PAGES_PER_TEACHER) {
     const current = queue.shift();
     const pageUrl = normalizeUrl(new URL(current.url, crawlUrl));
-    const pageKey = pageUrl.replace(/\/$/, "");
+    const pageKey = normalizeIdentityUrl(pageUrl);
     if (visited.has(pageKey)) continue;
     visited.add(pageKey);
 
@@ -565,6 +672,10 @@ async function crawlTeacherTools(teacher) {
     } catch (error) {
       if (current.depth === 0) throw error;
       console.warn(`${teacher.name}: ${pageUrl} (${error.message})`);
+      pageErrors.push({ url: getPreferredToolUrl(pageUrl), message: error.message });
+      if (current.sourceCandidate) {
+        mergeTool(tools, seenTools, current.sourceCandidate);
+      }
       continue;
     }
 
@@ -575,8 +686,13 @@ async function crawlTeacherTools(teacher) {
 
     const candidates = extractPageCandidates(html, teacher, pageUrl);
     const pendingTools = candidates.filter((candidate) => candidate.url === "#");
-    const listedToolCards = candidates.filter((candidate) => candidate._kind === "card");
+    const listedToolCards = candidates.filter((candidate) => ["card", "tool-card"].includes(candidate._kind));
     let hasChildTools = pendingTools.length > 0 || scriptTools.length > 0;
+
+    for (const candidate of candidates.filter((item) => item._kind === "tool-card")) {
+      mergeTool(tools, seenTools, candidate);
+      hasChildTools = true;
+    }
 
     if (current.depth >= MAX_CRAWL_DEPTH) {
       if (listedToolCards.length === 0) {
@@ -611,7 +727,15 @@ async function crawlTeacherTools(teacher) {
     }
   }
 
-  return tools;
+  return {
+    tools,
+    stats: {
+      status: pageErrors.length ? "warning" : "success",
+      count: tools.length,
+      pagesVisited: visited.size,
+      pageErrors,
+    },
+  };
 }
 
 async function main() {
@@ -620,6 +744,7 @@ async function main() {
     generatedAt: new Date().toISOString(),
     teachers: {},
     crawlErrors: [],
+    crawlStats: {},
   };
 
   for (const teacher of teachers) {
@@ -627,8 +752,12 @@ async function main() {
     if (!crawlUrl || crawlUrl === "#") continue;
 
     try {
-      const tools = await crawlTeacherTools(teacher);
+      const { tools, stats } = await crawlTeacherTools(teacher);
       output.teachers[teacher.name] = tools.length ? tools : teacher.tools || [];
+      output.crawlStats[teacher.name] = {
+        ...stats,
+        count: output.teachers[teacher.name].length,
+      };
       console.log(`${teacher.name}: ${output.teachers[teacher.name].length} tools`);
     } catch (error) {
       output.teachers[teacher.name] = teacher.tools || [];
@@ -637,6 +766,12 @@ async function main() {
         url: crawlUrl,
         message: error.message,
       });
+      output.crawlStats[teacher.name] = {
+        status: (teacher.tools || []).length ? "fallback" : "error",
+        count: output.teachers[teacher.name].length,
+        pagesVisited: 0,
+        pageErrors: [{ url: crawlUrl, message: error.message }],
+      };
       console.warn(`${teacher.name}: ${error.message}`);
     }
   }
@@ -658,6 +793,8 @@ module.exports = {
   extractAppsFromJavaScript,
   extractCandidatesFromHtml,
   extractPageCandidates,
+  getCandidateKey,
   loadTeachers,
+  normalizeIdentityUrl,
   shouldFollow,
 };
