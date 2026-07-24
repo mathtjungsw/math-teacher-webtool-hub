@@ -1,7 +1,100 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-24T10:16:31.121Z",
+  "generatedAt": "2026-07-24T21:03:11.088Z",
   "teachers": {
     "정승원": [
+      {
+        "title": "평면좌표와 직선의 방정식",
+        "description": "두 점의 거리·내분부터 직선의 여러 표현, 평행·수직, 점과 직선의 거리, 교과서 직선 미술까지 7개 탭으로 탐구합니다.",
+        "tags": [
+          "기하",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/common-math2/index.html?tool=coordinate"
+      },
+      {
+        "title": "원의 방정식",
+        "description": "원의 방정식, 일반형 판정, 원과 직선의 위치 관계, 접선, 거리비의 자취와 교과서 충돌 판정을 한 흐름으로 연결합니다.",
+        "tags": [
+          "기하",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/common-math2/index.html?tool=circle"
+      },
+      {
+        "title": "도형의 이동",
+        "description": "이동 벡터와 점·그래프·방정식의 연동, 식 속 부호, 네 가지 대칭 규칙과 두 번 대칭을 6개 탭으로 확인합니다.",
+        "tags": [
+          "기하",
+          "공학도구",
+          "수업활동",
+          "함수"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/common-math2/index.html?tool=transform"
+      },
+      {
+        "title": "집합",
+        "description": "집합의 세 표현과 부분집합부터 교집합·합집합·포함배제·여집합·드모르간 법칙, 교과서 자료 분류까지 탐구합니다.",
+        "tags": [
+          "공학도구",
+          "수업활동",
+          "인공지능 수학"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/common-math2/index.html?tool=set"
+      },
+      {
+        "title": "명제",
+        "description": "진리집합, 모든·어떤, 반례, 역·대우, 필요충분조건, 직접 증명·귀류법과 교과서 논리 활동을 한 도구로 묶었습니다.",
+        "tags": [
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/common-math2/index.html?tool=logic"
+      },
+      {
+        "title": "함수와 합성함수",
+        "description": "함수의 대응 조건과 여러 표현, 일대일 판정, 합성 순서와 정의 가능 조건, 세 단계 합성을 8개 탭으로 추적합니다.",
+        "tags": [
+          "공학도구",
+          "수업활동",
+          "함수"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/common-math2/index.html?tool=function"
+      },
+      {
+        "title": "역함수",
+        "description": "일대일대응 조건, y=x 대칭, 정의역 제한, 합성으로 원상복구와 교과서 역문제를 ‘되감기’ 흐름으로 연결합니다.",
+        "tags": [
+          "기하",
+          "공학도구",
+          "수업활동",
+          "함수"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/common-math2/index.html?tool=inverse"
+      },
+      {
+        "title": "유리함수",
+        "description": "기본형, 점근선, 평행이동, 식 변형과 정의역을 조절하고 파일 전송·교과서 기대수명 함수 모델로 적용합니다.",
+        "tags": [
+          "기하",
+          "공학도구",
+          "수업활동",
+          "함수"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/common-math2/index.html?tool=rational"
+      },
+      {
+        "title": "무리함수",
+        "description": "근호의 허용 범위와 무리식 계산부터 제곱근 그래프의 방향·시작점·역함수 대칭·교점의 무연근 검증까지 이어집니다.",
+        "tags": [
+          "기하",
+          "공학도구",
+          "수업활동",
+          "함수"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/common-math2/index.html?tool=radical"
+      },
       {
         "title": "접고 · 뚫고 · 펼치는 대칭 실험실",
         "description": "정사각형 종이를 접고 한 번 뚫거나 직선으로 자른 뒤, 역순으로 펼치며 생기는 반사상과 중복을 단계별로 탐구합니다.",
@@ -837,8 +930,8 @@ window.generatedTeacherTools = {
   "crawlStats": {
     "정승원": {
       "status": "success",
-      "count": 61,
-      "pagesVisited": 62,
+      "count": 70,
+      "pagesVisited": 71,
       "pageErrors": []
     },
     "정종엽": {
