@@ -1,7 +1,37 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-26T20:57:20.810Z",
+  "generatedAt": "2026-07-27T11:20:34.461Z",
   "teachers": {
     "정승원": [
+      {
+        "title": "기하Ⅰ · 이차곡선",
+        "description": "원뿔 절단부터 포물선·타원·쌍곡선의 정의와 방정식, 접선, 반사 성질, 망원경·건축 프로젝트까지 22개 탭으로 통합했습니다.",
+        "tags": [
+          "기하",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/geometry/index.html?chapter=conic"
+      },
+      {
+        "title": "기하Ⅱ · 공간도형과 공간좌표",
+        "description": "직선과 평면의 위치 관계, 삼수선 정리, 정사영, 공간좌표와 내분점, 구의 방정식, 교과서 프로젝트를 19개 탭으로 정리했습니다.",
+        "tags": [
+          "기하",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/geometry/index.html?chapter=space"
+      },
+      {
+        "title": "기하Ⅲ · 벡터",
+        "description": "벡터의 연산·위치벡터·성분·내적, 직선과 평면의 방정식, 상대 속도와 제트 기류 프로젝트를 21개 탭으로 연결했습니다.",
+        "tags": [
+          "기하",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/geometry/index.html?chapter=vector"
+      },
       {
         "title": "평면좌표와 직선의 방정식",
         "description": "두 점의 거리·내분부터 직선의 여러 표현, 평행·수직, 점과 직선의 거리, 교과서 직선 미술까지 7개 탭으로 탐구합니다.",
@@ -930,8 +960,8 @@ window.generatedTeacherTools = {
   "crawlStats": {
     "정승원": {
       "status": "success",
-      "count": 70,
-      "pagesVisited": 71,
+      "count": 73,
+      "pagesVisited": 74,
       "pageErrors": []
     },
     "정종엽": {
