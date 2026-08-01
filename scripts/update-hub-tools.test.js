@@ -6,7 +6,12 @@ const {
   extractCardToolsFromHtml,
   extractCandidatesFromHtml,
   getCandidateKey,
+  hasMeaningfulOutputChange,
+  loadTeachers,
   normalizeIdentityUrl,
+  parseJavaScriptLiteral,
+  protectAgainstRegression,
+  resolveHttpUrl,
   shouldFollow,
 } = require("./update-hub-tools.js");
 
@@ -78,6 +83,19 @@ test("ignores unresolved template URLs", () => {
   assert.deepEqual(tools, []);
 });
 
+test("rejects non-HTTP tool links", () => {
+  const html = `
+    <article class="tool-card">
+      <h3>Unsafe tool</h3>
+      <p>This link must not be rendered.</p>
+      <a href="javascript:alert(1)">Open</a>
+    </article>
+  `;
+
+  assert.deepEqual(extractCardToolsFromHtml(html, teacher, teacher.url), []);
+  assert.equal(resolveHttpUrl("javascript:alert(1)", teacher.url), "");
+});
+
 test("deduplicates manual and cache query variants", () => {
   const direct = "https://example.com/tool/index.html";
   const manual = "https://example.com/tool/index.html?manual=1&v=20260719&utm_source=hub";
@@ -123,4 +141,52 @@ test("extracts rendered apps from a JavaScript apps array", () => {
   assert.equal(tools[0].title, "몬티홀 실험실");
   assert.equal(tools[0].url, "https://example.com/library/apps/monty-hall/index.html");
   assert.ok(tools[0].tags.includes("확률"));
+});
+
+test("parses data literals without executing expressions", () => {
+  const parsed = parseJavaScriptLiteral(`[
+    { title: 'Tool', enabled: true, count: 3, tags: ['math'], },
+  ]`);
+
+  assert.equal(parsed[0].title, "Tool");
+  assert.equal(parsed[0].enabled, true);
+  assert.throws(() => parseJavaScriptLiteral("[(() => ({ title: 'Unsafe' }))()]"));
+
+  const tools = extractAppsFromJavaScript(
+    "const apps = [(() => ({ title: 'Unsafe', url: 'https://example.com/' }))()];",
+    teacher,
+    teacher.url,
+  );
+  assert.deepEqual(tools, []);
+});
+
+test("loads teacher data with the restricted literal parser", () => {
+  const teachers = loadTeachers();
+
+  assert.ok(teachers.length >= 5);
+  assert.equal(teachers[0].name, "정승원");
+});
+
+test("keeps the previous index when collection drops by more than twenty percent", () => {
+  const previousTools = Array.from({ length: 5 }, (_, index) => ({ title: `Old ${index}`, url: `https://example.com/${index}` }));
+  const observedTools = previousTools.slice(0, 3);
+  const result = protectAgainstRegression(observedTools, {
+    status: "success",
+    count: observedTools.length,
+    pagesVisited: 8,
+    pageErrors: [],
+  }, previousTools);
+
+  assert.equal(result.stats.status, "regression");
+  assert.equal(result.stats.observedCount, 3);
+  assert.deepEqual(result.tools, previousTools);
+});
+
+test("ignores generated timestamps when checking for data changes", () => {
+  const previous = { generatedAt: "2026-01-01T00:00:00.000Z", teachers: { Teacher: [] }, crawlErrors: [], crawlStats: {} };
+  const current = { ...previous, generatedAt: "2026-02-01T00:00:00.000Z" };
+
+  assert.equal(hasMeaningfulOutputChange(current, previous), false);
+  current.teachers = { Teacher: [{ title: "New", url: "https://example.com/new" }] };
+  assert.equal(hasMeaningfulOutputChange(current, previous), true);
 });

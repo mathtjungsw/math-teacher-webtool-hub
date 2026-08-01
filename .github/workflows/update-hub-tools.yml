@@ -2,6 +2,12 @@ name: Update hub webtool index
 
 on:
   workflow_dispatch:
+    inputs:
+      allow_count_drop:
+        description: Allow a collected tool count to drop by more than 20 percent
+        required: false
+        type: boolean
+        default: false
   schedule:
     - cron: "0 8,20 * * *"
   push:
@@ -13,18 +19,25 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: update-hub-webtool-index
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Generate webtool index
         run: node scripts/update-hub-tools.js
+        env:
+          ALLOW_TOOL_COUNT_DROP: ${{ inputs.allow_count_drop && '1' || '0' }}
 
       - name: Commit updated index
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
         with:
           commit_message: Update generated hub webtool index
           file_pattern: generated-tools.js

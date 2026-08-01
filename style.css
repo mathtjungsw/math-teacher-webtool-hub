@@ -613,6 +613,33 @@ h1 {
   color: #ffffff;
 }
 
+.load-more-tools {
+  display: flex;
+  min-width: 180px;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  margin: 22px auto 0;
+  padding: 0 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--blue);
+  font-weight: 950;
+  box-shadow: 0 8px 20px rgba(24, 34, 48, 0.07);
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.load-more-tools:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(37, 99, 235, 0.12);
+}
+
+.load-more-tools[hidden] {
+  display: none;
+}
+
 .empty-message {
   margin: 18px 0 0;
   padding: 22px;

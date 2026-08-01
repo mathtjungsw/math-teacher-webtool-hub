@@ -83,6 +83,7 @@ const teachers = [
     tags: ["인공지능 수학", "공학도구", "수업활동"],
     url: "https://mathhome.streamlit.app/",
     crawlUrl: "https://mathhome.streamlit.app/",
+    crawlDisabled: true,
     image: "",
     imageAlt: "김동우 선생님 AI 수학 웹툴 페이지 미리보기",
     tools: [

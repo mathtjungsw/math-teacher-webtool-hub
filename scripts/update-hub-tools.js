@@ -1,6 +1,5 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const vm = require("node:vm");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
 const DATA_PATH = path.join(ROOT_DIR, "data.js");
@@ -8,6 +7,11 @@ const OUTPUT_PATH = path.join(ROOT_DIR, "generated-tools.js");
 const MAX_TOOLS_PER_TEACHER = 200;
 const MAX_CRAWL_DEPTH = 2;
 const MAX_PAGES_PER_TEACHER = 250;
+const MAX_CONCURRENT_FETCHES = 4;
+const FETCH_TIMEOUT_MS = 12_000;
+const MAX_FETCH_ATTEMPTS = 3;
+const MAX_ALLOWED_DROP_RATIO = 0.2;
+const MIN_REGRESSION_BASELINE = 3;
 
 const IDENTITY_QUERY_PARAMS = new Set([
   "manual",
@@ -70,10 +74,24 @@ const TAG_ATTRIBUTE_KEYWORDS = [
 
 function loadTeachers() {
   const code = fs.readFileSync(DATA_PATH, "utf8");
-  const sandbox = { window: {} };
-  vm.runInNewContext(code, sandbox, { filename: DATA_PATH });
+  const arraySource = findJavaScriptArray(code, "teachers");
+  const teachers = parseJavaScriptLiteral(arraySource);
 
-  return sandbox.window.teachers || [];
+  return Array.isArray(teachers) ? teachers : [];
+}
+
+function loadPreviousOutput() {
+  if (!fs.existsSync(OUTPUT_PATH)) return null;
+
+  try {
+    const source = fs.readFileSync(OUTPUT_PATH, "utf8");
+    const start = source.indexOf("{");
+    const end = source.lastIndexOf("}");
+    if (start < 0 || end <= start) return null;
+    return JSON.parse(source.slice(start, end + 1));
+  } catch {
+    return null;
+  }
 }
 
 function decodeEntities(value) {
@@ -199,8 +217,19 @@ function isHtmlLikeUrl(url) {
   return basename === "" || basename.endsWith(".html") || !basename.includes(".");
 }
 
+function resolveHttpUrl(value, baseUrl) {
+  try {
+    const parsed = baseUrl ? new URL(value, baseUrl) : new URL(value);
+    return ["http:", "https:"].includes(parsed.protocol) ? parsed.href : "";
+  } catch {
+    return "";
+  }
+}
+
 function normalizeUrl(url) {
-  const parsed = new URL(url);
+  const safeUrl = resolveHttpUrl(url);
+  if (!safeUrl) throw new TypeError("Only HTTP and HTTPS URLs are supported");
+  const parsed = new URL(safeUrl);
   parsed.hash = "";
   return parsed.href;
 }
@@ -220,7 +249,8 @@ function normalizeIdentityUrl(url) {
 
 function getPreferredToolUrl(url) {
   if (!url || url === "#") return "#";
-  return normalizeIdentityUrl(url);
+  const safeUrl = resolveHttpUrl(url);
+  return safeUrl ? normalizeIdentityUrl(safeUrl) : "#";
 }
 
 function normalizePathname(url) {
@@ -358,7 +388,7 @@ function extractElementBlocksByClass(html, className) {
   return blocks;
 }
 
-function chooseCardLink(cardHtml) {
+function chooseCardLink(cardHtml, pageUrl) {
   const links = [];
   const anchorPattern = /<a\b([^>]*)>([\s\S]*?)<\/a>/gi;
 
@@ -366,10 +396,12 @@ function chooseCardLink(cardHtml) {
     const href = getAttribute(match[1], "href");
     if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) continue;
     if (href.includes("${") || /%7b|%7d/i.test(href)) continue;
+    const url = resolveHttpUrl(href, pageUrl);
+    if (!url) continue;
 
     const classNames = getAttribute(match[1], "class").split(/\s+/);
     const isGuide = classNames.includes("guide-link") || /(?:^|[?&])manual=1(?:&|$)/i.test(href);
-    links.push({ href, isGuide });
+    links.push({ href: url, isGuide });
   }
 
   return links.find((link) => !link.isGuide)?.href || links[0]?.href || "";
@@ -394,7 +426,7 @@ function extractCardToolsFromHtml(html, teacher, pageUrl) {
     const tagText =
       firstMatchText(cardHtml, /<span[^>]*class=["'][^"']*(?:card-tag|tool-badge|tag)[^"']*["'][^>]*>([\s\S]*?)<\/span>/i) ||
       "";
-    const href = chooseCardLink(cardHtml);
+    const href = chooseCardLink(cardHtml, pageUrl);
     const pendingLabel =
       firstMatchText(cardHtml, /<(?:span|button)[^>]*class=["'][^"']*(?:btn-wip|is-disabled|coming-soon)[^"']*["'][^>]*>([\s\S]*?)<\/(?:span|button)>/i) ||
       "";
@@ -404,7 +436,7 @@ function extractCardToolsFromHtml(html, teacher, pageUrl) {
 
     if (href && !href.startsWith("#") && !href.startsWith("mailto:") && !href.startsWith("tel:")) {
       try {
-        url = new URL(href, pageUrl).href;
+        url = resolveHttpUrl(href, pageUrl) || "#";
       } catch {
         url = "#";
       }
@@ -427,19 +459,72 @@ function extractCardToolsFromHtml(html, teacher, pageUrl) {
   return tools;
 }
 
-async function fetchHtml(url) {
-  const response = await fetch(url, {
-    headers: {
-      "user-agent": "math-webtool-hub-crawler/1.0",
-      accept: "text/html,application/xhtml+xml",
-    },
-  });
+function delay(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
 
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
+function isRetryableStatus(status) {
+  return status === 408 || status === 429 || status >= 500;
+}
+
+async function fetchHtml(url) {
+  const safeUrl = resolveHttpUrl(url);
+  if (!safeUrl) throw new TypeError("Only HTTP and HTTPS URLs are supported");
+
+  let lastError;
+
+  for (let attempt = 1; attempt <= MAX_FETCH_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await fetch(safeUrl, {
+        headers: {
+          "user-agent": "math-webtool-hub-crawler/1.0",
+          accept: "text/html,application/xhtml+xml",
+        },
+        signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+      });
+
+      if (!response.ok) {
+        const error = new Error(`HTTP ${response.status}`);
+        error.retryable = isRetryableStatus(response.status);
+        throw error;
+      }
+
+      return response.text();
+    } catch (error) {
+      lastError = error;
+      if (attempt >= MAX_FETCH_ATTEMPTS || error.retryable === false) break;
+      await delay(250 * (2 ** (attempt - 1)));
+    }
   }
 
-  return response.text();
+  throw lastError || new Error("Fetch failed");
+}
+
+function createTaskLimiter(limit) {
+  let activeCount = 0;
+  const pending = [];
+
+  function runNext() {
+    if (activeCount >= limit || pending.length === 0) return;
+    const { task, resolve } = pending.shift();
+    activeCount += 1;
+
+    Promise.resolve()
+      .then(task)
+      .then(
+        (value) => resolve({ value }),
+        (error) => resolve({ error }),
+      )
+      .finally(() => {
+        activeCount -= 1;
+        runNext();
+      });
+  }
+
+  return (task) => new Promise((resolve) => {
+    pending.push({ task, resolve });
+    runNext();
+  });
 }
 
 function findJavaScriptArray(source, variableName) {
@@ -479,15 +564,185 @@ function findJavaScriptArray(source, variableName) {
   return "";
 }
 
+function parseJavaScriptLiteral(source) {
+  const input = String(source || "");
+  let index = 0;
+
+  function fail(message) {
+    throw new SyntaxError(`${message} at position ${index}`);
+  }
+
+  function skipWhitespaceAndComments() {
+    while (index < input.length) {
+      if (/\s/.test(input[index])) {
+        index += 1;
+        continue;
+      }
+
+      if (input.startsWith("//", index)) {
+        const lineEnd = input.indexOf("\n", index + 2);
+        index = lineEnd < 0 ? input.length : lineEnd + 1;
+        continue;
+      }
+
+      if (input.startsWith("/*", index)) {
+        const commentEnd = input.indexOf("*/", index + 2);
+        if (commentEnd < 0) fail("Unterminated comment");
+        index = commentEnd + 2;
+        continue;
+      }
+
+      break;
+    }
+  }
+
+  function parseString() {
+    const quote = input[index];
+    index += 1;
+    let value = "";
+
+    while (index < input.length) {
+      const character = input[index];
+      index += 1;
+
+      if (character === quote) return value;
+      if (quote === "`" && character === "$" && input[index] === "{") {
+        fail("Template expressions are not allowed");
+      }
+      if (character !== "\\") {
+        value += character;
+        continue;
+      }
+
+      if (index >= input.length) fail("Unterminated escape sequence");
+      const escaped = input[index];
+      index += 1;
+      const escapes = {
+        b: "\b",
+        f: "\f",
+        n: "\n",
+        r: "\r",
+        t: "\t",
+        v: "\v",
+        "0": "\0",
+      };
+
+      if (Object.prototype.hasOwnProperty.call(escapes, escaped)) {
+        value += escapes[escaped];
+      } else if (escaped === "u") {
+        const hex = input.slice(index, index + 4);
+        if (!/^[0-9a-f]{4}$/i.test(hex)) fail("Invalid Unicode escape");
+        value += String.fromCharCode(Number.parseInt(hex, 16));
+        index += 4;
+      } else if (escaped === "x") {
+        const hex = input.slice(index, index + 2);
+        if (!/^[0-9a-f]{2}$/i.test(hex)) fail("Invalid hexadecimal escape");
+        value += String.fromCharCode(Number.parseInt(hex, 16));
+        index += 2;
+      } else if (escaped === "\n") {
+        // JavaScript line continuation.
+      } else {
+        value += escaped;
+      }
+    }
+
+    fail("Unterminated string");
+  }
+
+  function parseNumber() {
+    const match = input.slice(index).match(/^[+-]?(?:0[xob][0-9a-f]+|(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?)/i);
+    if (!match) fail("Invalid number");
+    index += match[0].length;
+    const value = Number(match[0]);
+    if (!Number.isFinite(value)) fail("Non-finite numbers are not allowed");
+    return value;
+  }
+
+  function parseIdentifier() {
+    const match = input.slice(index).match(/^[A-Za-z_$][\w$]*/);
+    if (!match) fail("Expected identifier");
+    index += match[0].length;
+    return match[0];
+  }
+
+  function parseArray() {
+    const values = [];
+    index += 1;
+    skipWhitespaceAndComments();
+
+    while (input[index] !== "]") {
+      values.push(parseValue());
+      skipWhitespaceAndComments();
+      if (input[index] === ",") {
+        index += 1;
+        skipWhitespaceAndComments();
+        if (input[index] === "]") break;
+        continue;
+      }
+      if (input[index] !== "]") fail("Expected comma or closing bracket");
+    }
+
+    if (input[index] !== "]") fail("Unterminated array");
+    index += 1;
+    return values;
+  }
+
+  function parseObject() {
+    const value = Object.create(null);
+    index += 1;
+    skipWhitespaceAndComments();
+
+    while (input[index] !== "}") {
+      const key = ["'", '"', "`"].includes(input[index]) ? parseString() : parseIdentifier();
+      skipWhitespaceAndComments();
+      if (input[index] !== ":") fail("Expected colon");
+      index += 1;
+      value[key] = parseValue();
+      skipWhitespaceAndComments();
+      if (input[index] === ",") {
+        index += 1;
+        skipWhitespaceAndComments();
+        if (input[index] === "}") break;
+        continue;
+      }
+      if (input[index] !== "}") fail("Expected comma or closing brace");
+    }
+
+    if (input[index] !== "}") fail("Unterminated object");
+    index += 1;
+    return value;
+  }
+
+  function parseValue() {
+    skipWhitespaceAndComments();
+    const character = input[index];
+
+    if (character === "[") return parseArray();
+    if (character === "{") return parseObject();
+    if (["'", '"', "`"].includes(character)) return parseString();
+    if (/[+\-.\d]/.test(character || "")) return parseNumber();
+
+    const identifier = parseIdentifier();
+    if (identifier === "true") return true;
+    if (identifier === "false") return false;
+    if (identifier === "null") return null;
+    fail(`Unsupported value ${identifier}`);
+  }
+
+  const value = parseValue();
+  skipWhitespaceAndComments();
+  if (index !== input.length) fail("Unexpected trailing content");
+  return value;
+}
+
 function extractAppsFromJavaScript(source, teacher, pageUrl) {
   const arraySource = findJavaScriptArray(source, "apps");
   if (!arraySource) return [];
 
-  const sandbox = {};
   let apps;
 
   try {
-    apps = vm.runInNewContext(arraySource, sandbox, { timeout: 1000 });
+    apps = parseJavaScriptLiteral(arraySource);
   } catch {
     return [];
   }
@@ -499,11 +754,7 @@ function extractAppsFromJavaScript(source, teacher, pageUrl) {
     .map((app) => {
       let url = "#";
 
-      try {
-        url = new URL(app.url, pageUrl).href;
-      } catch {
-        url = "#";
-      }
+      url = resolveHttpUrl(app.url, pageUrl) || "#";
 
       const tags = inferTags(
         `${app.title || ""} ${app.subject || ""} ${app.category || ""} ${app.description || ""} ${(app.tags || []).join(" ")}`,
@@ -652,12 +903,26 @@ function mergeTool(tools, seen, tool) {
 }
 
 async function crawlTeacherTools(teacher) {
-  const crawlUrl = teacher.crawlUrl || teacher.url;
+  const crawlUrl = resolveHttpUrl(teacher.crawlUrl || teacher.url);
+  if (!crawlUrl) throw new TypeError("Only HTTP and HTTPS crawl URLs are supported");
   const queue = [{ url: crawlUrl, depth: 0, sourceCandidate: null }];
   const visited = new Set();
   const seenTools = new Set();
   const tools = [];
   const pageErrors = [];
+  const fetchPage = createTaskLimiter(MAX_CONCURRENT_FETCHES);
+  const fetchCache = new Map();
+
+  function prefetchPage(url) {
+    const pageUrl = normalizeUrl(new URL(url, crawlUrl));
+    const key = normalizeIdentityUrl(pageUrl);
+    if (!fetchCache.has(key)) {
+      fetchCache.set(key, fetchPage(() => fetchHtml(pageUrl)));
+    }
+    return fetchCache.get(key);
+  }
+
+  prefetchPage(crawlUrl);
 
   while (queue.length && tools.length < MAX_TOOLS_PER_TEACHER && visited.size < MAX_PAGES_PER_TEACHER) {
     const current = queue.shift();
@@ -666,10 +931,9 @@ async function crawlTeacherTools(teacher) {
     if (visited.has(pageKey)) continue;
     visited.add(pageKey);
 
-    let html;
-    try {
-      html = await fetchHtml(pageUrl);
-    } catch (error) {
+    const fetchResult = await prefetchPage(pageUrl);
+    if (fetchResult.error) {
+      const error = fetchResult.error;
       if (current.depth === 0) throw error;
       console.warn(`${teacher.name}: ${pageUrl} (${error.message})`);
       pageErrors.push({ url: getPreferredToolUrl(pageUrl), message: error.message });
@@ -678,6 +942,7 @@ async function crawlTeacherTools(teacher) {
       }
       continue;
     }
+    const html = fetchResult.value;
 
     const scriptTools = await extractScriptAppTools(html, teacher, pageUrl);
     for (const tool of scriptTools) {
@@ -705,6 +970,7 @@ async function crawlTeacherTools(teacher) {
       if (!candidate.url || candidate.url === "#") continue;
 
       if (shouldFollow(candidate, teacher, current.depth)) {
+        prefetchPage(candidate.url);
         queue.push({
           url: candidate.url,
           depth: current.depth + 1,
@@ -738,10 +1004,61 @@ async function crawlTeacherTools(teacher) {
   };
 }
 
+function protectAgainstRegression(observedTools, stats, previousTools, allowCountDrop = false) {
+  const previous = Array.isArray(previousTools) ? previousTools : [];
+  const observed = Array.isArray(observedTools) ? observedTools : [];
+  const minimumExpected = Math.ceil(previous.length * (1 - MAX_ALLOWED_DROP_RATIO));
+  const isRegression = !allowCountDrop
+    && previous.length >= MIN_REGRESSION_BASELINE
+    && observed.length < minimumExpected;
+
+  if (!isRegression) {
+    return { tools: observed, stats, regressionMessage: "" };
+  }
+
+  const regressionMessage = `Collected ${observed.length} tools; kept previous ${previous.length} tools`;
+  return {
+    tools: previous,
+    stats: {
+      ...stats,
+      status: "regression",
+      count: previous.length,
+      observedCount: observed.length,
+      previousCount: previous.length,
+      message: regressionMessage,
+    },
+    regressionMessage,
+  };
+}
+
+function getComparableOutput(output) {
+  if (!output) return null;
+  const { generatedAt, ...comparable } = output;
+  return comparable;
+}
+
+function hasMeaningfulOutputChange(output, previousOutput) {
+  return JSON.stringify(getComparableOutput(output)) !== JSON.stringify(getComparableOutput(previousOutput));
+}
+
+function writeOutputIfChanged(output, previousOutput) {
+  if (!hasMeaningfulOutputChange(output, previousOutput)) {
+    console.log("No webtool data changes detected");
+    return false;
+  }
+
+  output.generatedAt = new Date().toISOString();
+  const file = `window.generatedTeacherTools = ${JSON.stringify(output, null, 2)};\n`;
+  fs.writeFileSync(OUTPUT_PATH, file, "utf8");
+  return true;
+}
+
 async function main() {
   const teachers = loadTeachers();
+  const previousOutput = loadPreviousOutput();
+  const allowCountDrop = process.env.ALLOW_TOOL_COUNT_DROP === "1";
   const output = {
-    generatedAt: new Date().toISOString(),
+    generatedAt: previousOutput?.generatedAt || null,
     teachers: {},
     crawlErrors: [],
     crawlStats: {},
@@ -751,33 +1068,66 @@ async function main() {
     const crawlUrl = teacher.crawlUrl || teacher.url;
     if (!crawlUrl || crawlUrl === "#") continue;
 
+    if (teacher.crawlDisabled) {
+      const manualTools = teacher.tools || [];
+      output.teachers[teacher.name] = manualTools;
+      output.crawlStats[teacher.name] = {
+        status: "manual",
+        count: manualTools.length,
+        pagesVisited: 0,
+        pageErrors: [],
+        message: "Automatic collection is disabled; using manually registered tools",
+      };
+      console.log(`${teacher.name}: ${manualTools.length} manually registered tools`);
+      continue;
+    }
+
     try {
       const { tools, stats } = await crawlTeacherTools(teacher);
-      output.teachers[teacher.name] = tools.length ? tools : teacher.tools || [];
+      const observedTools = tools.length ? tools : teacher.tools || [];
+      const protectedResult = protectAgainstRegression(
+        observedTools,
+        stats,
+        previousOutput?.teachers?.[teacher.name],
+        allowCountDrop,
+      );
+      output.teachers[teacher.name] = protectedResult.tools;
       output.crawlStats[teacher.name] = {
-        ...stats,
+        ...protectedResult.stats,
         count: output.teachers[teacher.name].length,
       };
+      if (protectedResult.regressionMessage) {
+        output.crawlErrors.push({
+          teacher: teacher.name,
+          url: crawlUrl,
+          message: protectedResult.regressionMessage,
+          type: "count-regression",
+        });
+      }
       console.log(`${teacher.name}: ${output.teachers[teacher.name].length} tools`);
     } catch (error) {
-      output.teachers[teacher.name] = teacher.tools || [];
+      const previousTools = previousOutput?.teachers?.[teacher.name] || [];
+      const manualTools = teacher.tools || [];
+      output.teachers[teacher.name] = previousTools.length ? previousTools : manualTools;
       output.crawlErrors.push({
         teacher: teacher.name,
         url: crawlUrl,
         message: error.message,
       });
       output.crawlStats[teacher.name] = {
-        status: (teacher.tools || []).length ? "fallback" : "error",
+        status: previousTools.length ? "stale" : manualTools.length ? "fallback" : "error",
         count: output.teachers[teacher.name].length,
         pagesVisited: 0,
         pageErrors: [{ url: crawlUrl, message: error.message }],
+        message: previousTools.length
+          ? `Collection failed; kept previous ${previousTools.length} tools`
+          : "Collection failed; using manually registered tools",
       };
       console.warn(`${teacher.name}: ${error.message}`);
     }
   }
 
-  const file = `window.generatedTeacherTools = ${JSON.stringify(output, null, 2)};\n`;
-  fs.writeFileSync(OUTPUT_PATH, file, "utf8");
+  writeOutputIfChanged(output, previousOutput);
 }
 
 if (require.main === module) {
@@ -794,7 +1144,12 @@ module.exports = {
   extractCandidatesFromHtml,
   extractPageCandidates,
   getCandidateKey,
+  hasMeaningfulOutputChange,
   loadTeachers,
   normalizeIdentityUrl,
+  parseJavaScriptLiteral,
+  protectAgainstRegression,
+  resolveHttpUrl,
   shouldFollow,
+  writeOutputIfChanged,
 };

@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-07-31T21:03:17.694Z",
+  "generatedAt": "2026-08-01T08:23:32.912Z",
   "teachers": {
     "정승원": [
       {
@@ -688,6 +688,66 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/kbo-conditional-probability/index.html"
       },
       {
+        "title": "공통수학1 통합 실험실",
+        "description": "다항식, 방정식과 부등식, 순열·조합, 2×2 행렬을 식과 시각 모형으로 함께 탐구합니다.",
+        "tags": [
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/curriculum-labs/index.html?lab=common1"
+      },
+      {
+        "title": "대수 함수·수열 실험실",
+        "description": "지수와 로그의 역함수 관계를 그래프로 확인하고 등차·등비수열의 일반항과 합을 비교합니다.",
+        "tags": [
+          "공학도구",
+          "수업활동",
+          "함수"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/curriculum-labs/index.html?lab=algebra"
+      },
+      {
+        "title": "미분·적분 연결 실험실",
+        "description": "평균변화율이 미분계수로, 직사각형 합이 넓이로 가까워지는 두 극한 과정을 한 그래프에서 관찰합니다.",
+        "tags": [
+          "함수",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/curriculum-labs/index.html?lab=calculus"
+      },
+      {
+        "title": "통계적 추론 실험실",
+        "description": "표본오차·95% 신뢰구간·p값을 조작하고 상관관계가 인과관계를 보장하지 않는 이유를 실험합니다.",
+        "tags": [
+          "확률",
+          "통계",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/curriculum-labs/index.html?lab=inference"
+      },
+      {
+        "title": "방정식 저울·연립방정식",
+        "description": "일차방정식의 등식 성질을 저울로 표현하고 연립일차방정식의 해를 두 직선의 교점으로 확인합니다.",
+        "tags": [
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/curriculum-labs/index.html?lab=balance"
+      },
+      {
+        "title": "경우의 수 선택 나무",
+        "description": "선택 과정을 나뭇가지로 펼쳐 순열과 조합의 차이, nPr=nCr×r!의 구조를 발견합니다.",
+        "tags": [
+          "확률",
+          "통계",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/curriculum-labs/index.html?lab=counting"
+      },
+      {
         "title": "파일명 일괄 수정기",
         "description": "파일명 일괄 수정기 여러 파일과 폴더의 이름을 미리 확인하고 한 번에 바꾸는 도구입니다.",
         "tags": [
@@ -950,18 +1010,12 @@ window.generatedTeacherTools = {
       }
     ]
   },
-  "crawlErrors": [
-    {
-      "teacher": "김동우",
-      "url": "https://mathhome.streamlit.app/",
-      "message": "fetch failed"
-    }
-  ],
+  "crawlErrors": [],
   "crawlStats": {
     "정승원": {
       "status": "success",
-      "count": 73,
-      "pagesVisited": 74,
+      "count": 79,
+      "pagesVisited": 82,
       "pageErrors": []
     },
     "정종엽": {
@@ -983,15 +1037,11 @@ window.generatedTeacherTools = {
       "pageErrors": []
     },
     "김동우": {
-      "status": "fallback",
+      "status": "manual",
       "count": 1,
       "pagesVisited": 0,
-      "pageErrors": [
-        {
-          "url": "https://mathhome.streamlit.app/",
-          "message": "fetch failed"
-        }
-      ]
+      "pageErrors": [],
+      "message": "Automatic collection is disabled; using manually registered tools"
     }
   }
 };

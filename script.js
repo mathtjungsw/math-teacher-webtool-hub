@@ -15,10 +15,14 @@ const teacherTotal = document.querySelector("#teacher-total");
 const toolTotal = document.querySelector("#tool-total");
 const tagTotal = document.querySelector("#tag-total");
 const crawlStatus = document.querySelector("#crawl-status");
+const loadMoreToolsButton = document.querySelector("#load-more-tools");
+
+const TOOLS_PAGE_SIZE = 18;
 
 let activeTag = "전체 보기";
 let pageSearchTerm = "";
 let toolSearchTerm = "";
+let visibleToolLimit = TOOLS_PAGE_SIZE;
 
 function escapeHtml(value) {
   return String(value)
@@ -35,7 +39,13 @@ function normalize(value) {
 
 function hasReadyUrl(url) {
   const trimmedUrl = String(url || "").trim();
-  return trimmedUrl !== "" && trimmedUrl !== "#";
+  if (!trimmedUrl || trimmedUrl === "#") return false;
+
+  try {
+    return ["http:", "https:"].includes(new URL(trimmedUrl, window.location.href).protocol);
+  } catch {
+    return false;
+  }
 }
 
 function getGeneratedTools(teacher) {
@@ -53,10 +63,12 @@ function getTeacherTools(teacher) {
   const generatedTools = getGeneratedTools(teacher);
   const fallbackTools = teacher.tools || [];
   const preferredTools = generatedTools.length > 0 ? generatedTools : fallbackTools;
+  const crawlStatus = getTeacherCrawlStats(teacher)?.status;
+  const isManualSource = ["manual", "fallback"].includes(crawlStatus) || generatedTools.length === 0;
 
   return preferredTools.map((tool) => ({
     ...tool,
-    source: generatedTools.length > 0 ? "auto" : "manual",
+    source: isManualSource ? "manual" : "auto",
   }));
 }
 
@@ -175,14 +187,18 @@ function renderTeacherCrawlStatus(teacher) {
   if (!stats) return "";
 
   const errorCount = Array.isArray(stats.pageErrors) ? stats.pageErrors.length : 0;
-  const isHealthy = stats.status === "success";
-  const isFallback = stats.status === "fallback";
-  const label = isHealthy
-    ? `수집 확인 ${stats.count}개`
-    : isFallback
-      ? `자동 탐색 제한 · 수동 등록 ${stats.count}개`
-      : `링크 확인 필요 ${errorCount}개`;
-  const detail = `${stats.pagesVisited || 0}개 페이지 탐색${errorCount ? ` · ${errorCount}개 페이지 응답 오류` : ""}`;
+  const isHealthy = ["success", "manual"].includes(stats.status);
+  const statusLabels = {
+    success: `수집 확인 ${stats.count}개`,
+    manual: `자동 탐색 제외 · 수동 등록 ${stats.count}개`,
+    fallback: `자동 탐색 제한 · 수동 등록 ${stats.count}개`,
+    regression: `수집 급감 감지 · 이전 ${stats.count}개 유지`,
+    stale: `수집 실패 · 이전 ${stats.count}개 유지`,
+    warning: `링크 확인 필요 ${errorCount}개`,
+    error: "수집 실패",
+  };
+  const label = statusLabels[stats.status] || `수집 상태 확인 · ${stats.count}개`;
+  const detail = stats.message || `${stats.pagesVisited || 0}개 페이지 탐색${errorCount ? ` · ${errorCount}개 페이지 응답 오류` : ""}`;
 
   return `<p class="teacher-crawl-status ${isHealthy ? "is-success" : "is-warning"}" title="${escapeHtml(detail)}">
     <span aria-hidden="true"></span>${escapeHtml(label)}
@@ -251,11 +267,14 @@ function renderTeachers() {
 
 function renderTools() {
   const filteredTools = getFilteredTools();
+  const visibleTools = filteredTools.slice(0, visibleToolLimit);
   const countLabel = toolSearchTerm ? `검색 결과 ${filteredTools.length}개` : `등록된 웹툴 ${filteredTools.length}개`;
 
-  toolResults.innerHTML = filteredTools.map(renderToolResult).join("");
+  toolResults.innerHTML = visibleTools.map(renderToolResult).join("");
   toolCount.textContent = countLabel;
   toolEmpty.hidden = filteredTools.length > 0;
+  loadMoreToolsButton.hidden = visibleTools.length >= filteredTools.length;
+  loadMoreToolsButton.textContent = `더 보기 (${visibleTools.length}/${filteredTools.length})`;
 }
 
 function renderSummary() {
@@ -265,10 +284,11 @@ function renderSummary() {
 
   const generatedAt = window.generatedTeacherTools?.generatedAt;
   const crawlStats = Object.values(window.generatedTeacherTools?.crawlStats || {});
-  const healthyCount = crawlStats.filter((stats) => stats.status === "success").length;
-  const warningCount = crawlStats.filter((stats) => stats.status !== "success").length;
+  const automaticCount = crawlStats.filter((stats) => stats.status === "success").length;
+  const manualCount = crawlStats.filter((stats) => stats.status === "manual").length;
+  const warningCount = crawlStats.filter((stats) => !["success", "manual"].includes(stats.status)).length;
   const healthText = crawlStats.length
-    ? ` · ${healthyCount}명 정상${warningCount ? ` · ${warningCount}명 확인 필요` : ""}`
+    ? ` · ${automaticCount}명 자동 수집${manualCount ? ` · ${manualCount}명 수동 관리` : ""}${warningCount ? ` · ${warningCount}명 확인 필요` : ""}`
     : "";
   crawlStatus.textContent = generatedAt
     ? `자동 수집 ${new Date(generatedAt).toLocaleDateString("ko-KR")}${healthText}`
@@ -295,6 +315,7 @@ tagFilterContainer.addEventListener("click", (event) => {
   if (!button) return;
 
   activeTag = button.dataset.tag;
+  visibleToolLimit = TOOLS_PAGE_SIZE;
   updateView();
 });
 
@@ -306,6 +327,7 @@ pageSearchInput.addEventListener("input", (event) => {
 
 toolSearchInput.addEventListener("input", (event) => {
   toolSearchTerm = normalize(event.target.value);
+  visibleToolLimit = TOOLS_PAGE_SIZE;
   clearToolSearchButton.hidden = toolSearchTerm === "";
   updateSearchMode();
   renderTools();
@@ -322,9 +344,15 @@ clearPageSearchButton.addEventListener("click", () => {
 clearToolSearchButton.addEventListener("click", () => {
   toolSearchInput.value = "";
   toolSearchTerm = "";
+  visibleToolLimit = TOOLS_PAGE_SIZE;
   clearToolSearchButton.hidden = true;
   toolSearchInput.focus();
   updateView();
+});
+
+loadMoreToolsButton.addEventListener("click", () => {
+  visibleToolLimit += TOOLS_PAGE_SIZE;
+  renderTools();
 });
 
 updateView();
