@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-08-01T08:23:32.912Z",
+  "generatedAt": "2026-08-02T09:56:31.036Z",
   "teachers": {
     "정승원": [
       {
@@ -511,6 +511,15 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/economic-math/investment-portfolio/index.html"
       },
       {
+        "title": "명제 탐정단: 범인을 찾아라!",
+        "description": "4~10명의 가상 용의자에게 명제로 질문하고 공개된 역할 수를 바탕으로 진실·반대·자유 답변을 추리합니다. 참·거짓, 반례, 조건 집합 게임도 함께 제공합니다.",
+        "tags": [
+          "게임형 수업",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/proposition-detective/index.html"
+      },
+      {
         "title": "마이너스 경매",
         "description": "마이너스 경매 점수 카드를 낙찰받는 과정에서 음수의 덧셈과 뺄셈, 위험을 고려한 의사결정을 함께 경험합니다.",
         "tags": [
@@ -1014,8 +1023,8 @@ window.generatedTeacherTools = {
   "crawlStats": {
     "정승원": {
       "status": "success",
-      "count": 79,
-      "pagesVisited": 82,
+      "count": 80,
+      "pagesVisited": 83,
       "pageErrors": []
     },
     "정종엽": {
