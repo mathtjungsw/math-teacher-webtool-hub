@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-08-02T09:56:31.036Z",
+  "generatedAt": "2026-08-07T20:39:58.171Z",
   "teachers": {
     "정승원": [
       {
@@ -1004,6 +1004,18 @@ window.generatedTeacherTools = {
           "손글씨"
         ],
         "url": "https://meerani-t.github.io/teaching-app-library/apps/perceptron-handwriting-lab/index.html"
+      },
+      {
+        "title": "경사하강법 수행평가",
+        "description": "주어진 자료에서 경사하강법을 적용해 최적값을 탐색하는 인공지능 수학 수행평가 실전 활동입니다.",
+        "tags": [
+          "인공지능 수학",
+          "수업활동",
+          "경사하강법",
+          "최적화",
+          "인공지능"
+        ],
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/gradient-descent-assessment/index.html"
       }
     ],
     "김동우": [
@@ -1041,7 +1053,7 @@ window.generatedTeacherTools = {
     },
     "배미란": {
       "status": "success",
-      "count": 5,
+      "count": 6,
       "pagesVisited": 1,
       "pageErrors": []
     },
