@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-08-07T20:39:58.171Z",
+  "generatedAt": "2026-08-27T18:52:42.344Z",
   "teachers": {
     "정승원": [
       {
@@ -1016,6 +1016,18 @@ window.generatedTeacherTools = {
           "인공지능"
         ],
         "url": "https://meerani-t.github.io/teaching-app-library/apps/gradient-descent-assessment/index.html"
+      },
+      {
+        "title": "함수의 극한 형성평가",
+        "description": "함수의 극한 개념을 게임 형식으로 풀어보며 학습 내용을 확인하는 형성평가 활동입니다.",
+        "tags": [
+          "함수",
+          "게임형 수업",
+          "수업활동",
+          "함수의 극한",
+          "형성평가"
+        ],
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/limit-quest/index.html"
       }
     ],
     "김동우": [
@@ -1053,7 +1065,7 @@ window.generatedTeacherTools = {
     },
     "배미란": {
       "status": "success",
-      "count": 6,
+      "count": 7,
       "pagesVisited": 1,
       "pageErrors": []
     },
