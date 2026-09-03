@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-08-27T18:52:42.344Z",
+  "generatedAt": "2026-09-03T12:38:08.144Z",
   "teachers": {
     "정승원": [
       {
@@ -414,6 +414,17 @@ window.generatedTeacherTools = {
         "url": "https://mathtjungsw.github.io/math-class-webtools/ai-math/word-vector-playground/index.html"
       },
       {
+        "title": "한국어 워드클라우드 스튜디오",
+        "description": "한국어 불용어를 처리해 단어 빈도와 비율을 계산하고, 원·사각형·하트 등 다양한 모양의 워드클라우드를 만듭니다.",
+        "tags": [
+          "통계",
+          "인공지능 수학",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/ai-math/word-cloud-studio/index.html"
+      },
+      {
         "title": "이상 징후 탐지 연구소",
         "description": "합성 자료를 먼저 관찰해 이상점을 고르고, 임계값에 따른 혼동행렬·평가 지표·오류 비용의 변화를 비교합니다.",
         "tags": [
@@ -509,6 +520,16 @@ window.generatedTeacherTools = {
           "수업활동"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/economic-math/investment-portfolio/index.html"
+      },
+      {
+        "title": "10년 후 해외여행 자금 설계하기",
+        "description": "₩ ↔ ¥ 환율 · 적금 10년 후 해외여행 자금 설계하기 물가와 무작위 환율 상황을 반영해 여행비를 예측하고, 적금 상품별 월 납입액과 이자를 비교해 수행평가 보고서를 완성합니다.",
+        "tags": [
+          "경제수학",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/economic-math/exchange-interest-travel-plan/index.html"
       },
       {
         "title": "명제 탐정단: 범인을 찾아라!",
@@ -755,6 +776,16 @@ window.generatedTeacherTools = {
           "수업활동"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/curriculum-labs/index.html?lab=counting"
+      },
+      {
+        "title": "페르미 추정 수행평가",
+        "description": "생활 속 수량을 요소로 나누고 가정의 근거, 끝점 조합 범위, 민감도와 수정 과정을 기록해 제출 보고서로 완성합니다.",
+        "tags": [
+          "공학도구",
+          "수업활동",
+          "통계"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-project/fermi-estimation/index.html"
       },
       {
         "title": "파일명 일괄 수정기",
@@ -1047,8 +1078,8 @@ window.generatedTeacherTools = {
   "crawlStats": {
     "정승원": {
       "status": "success",
-      "count": 80,
-      "pagesVisited": 83,
+      "count": 83,
+      "pagesVisited": 86,
       "pageErrors": []
     },
     "정종엽": {
