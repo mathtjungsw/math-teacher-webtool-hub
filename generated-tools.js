@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-09-03T12:38:08.144Z",
+  "generatedAt": "2026-09-04T12:31:59.607Z",
   "teachers": {
     "정승원": [
       {
@@ -1059,6 +1059,18 @@ window.generatedTeacherTools = {
           "형성평가"
         ],
         "url": "https://meerani-t.github.io/teaching-app-library/apps/limit-quest/index.html"
+      },
+      {
+        "title": "연속함수의 성질 형성평가",
+        "description": "연속구간, 최대·최소 정리와 중간값 정리를 기본·도전 문제로 확인하는 게임형 형성평가입니다.",
+        "tags": [
+          "함수",
+          "게임형 수업",
+          "연속함수",
+          "최대·최소",
+          "중간값 정리"
+        ],
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/continuity-quest/index.html"
       }
     ],
     "김동우": [
@@ -1096,7 +1108,7 @@ window.generatedTeacherTools = {
     },
     "배미란": {
       "status": "success",
-      "count": 7,
+      "count": 8,
       "pagesVisited": 1,
       "pageErrors": []
     },
