@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-09-04T12:31:59.607Z",
+  "generatedAt": "2026-09-16T13:10:42.892Z",
   "teachers": {
     "정승원": [
       {
@@ -904,6 +904,14 @@ window.generatedTeacherTools = {
           "기하"
         ],
         "url": "https://shootting.github.io/student-app/geometry/vector_playground.html"
+      },
+      {
+        "title": "두 평면이 이루는 진짜 각도",
+        "description": "θ 이면각 두 평면이 이루는 진짜 각도 교선에 수직인 두 직선이 이루는 각만이 이면각입니다. 각도를 직접 바꿔가며 왜 수직이어야 하는지 실험해 보세요.",
+        "tags": [
+          "이면각"
+        ],
+        "url": "https://shootting.github.io/student-app/geometry/dihedral_angle.html"
       }
     ],
     "백승욱": [
@@ -1096,8 +1104,8 @@ window.generatedTeacherTools = {
     },
     "정종엽": {
       "status": "success",
-      "count": 6,
-      "pagesVisited": 9,
+      "count": 7,
+      "pagesVisited": 10,
       "pageErrors": []
     },
     "백승욱": {
