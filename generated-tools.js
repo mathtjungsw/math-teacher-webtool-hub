@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-09-16T13:10:42.892Z",
+  "generatedAt": "2026-09-22T13:08:21.617Z",
   "teachers": {
     "정승원": [
       {
@@ -1079,6 +1079,18 @@ window.generatedTeacherTools = {
           "중간값 정리"
         ],
         "url": "https://meerani-t.github.io/teaching-app-library/apps/continuity-quest/index.html"
+      },
+      {
+        "title": "미분 1차 형성평가",
+        "description": "미분계수와 도함수, 접선의 방정식, 평균값 정리를 기본·도전 문제로 확인하는 게임형 형성평가입니다.",
+        "tags": [
+          "함수",
+          "게임형 수업",
+          "미분계수",
+          "도함수",
+          "접선"
+        ],
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/differentiation-quest/index.html"
       }
     ],
     "김동우": [
@@ -1116,8 +1128,8 @@ window.generatedTeacherTools = {
     },
     "배미란": {
       "status": "success",
-      "count": 8,
-      "pagesVisited": 1,
+      "count": 9,
+      "pagesVisited": 2,
       "pageErrors": []
     },
     "김동우": {
