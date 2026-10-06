@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-09-22T13:08:21.617Z",
+  "generatedAt": "2026-10-06T14:46:28.010Z",
   "teachers": {
     "정승원": [
       {
@@ -898,10 +898,10 @@ window.generatedTeacherTools = {
         "url": "https://shootting.github.io/student-app/geometry/conic_folding.html"
       },
       {
-        "title": "크기와 방향을 가진 양",
-        "description": "a⃗ b⃗ a⃗+b⃗ 평면벡터 크기와 방향을 가진 양 벡터의 덧셈·뺄셈과 스칼라곱을 이해하고, 위치벡터와 내적의 기하학적 의미를 배웁니다.",
+        "title": "벡터의 덧셈과 뺄셈",
+        "description": "a⃗ B --> b⃗ C, 평행사변형의 대각선 --> a⃗+b⃗ A --> a⃗-b⃗ O 평면벡터 벡터의 덧셈과 뺄셈 평행사변형의 대각선으로 두 벡터의 합을, 두 벡터의 끝점을 잇는 선분으로 차를 구하는 원리를 직접 확인합니다.",
         "tags": [
-          "기하"
+          "평면벡터"
         ],
         "url": "https://shootting.github.io/student-app/geometry/vector_playground.html"
       },
@@ -912,6 +912,15 @@ window.generatedTeacherTools = {
           "이면각"
         ],
         "url": "https://shootting.github.io/student-app/geometry/dihedral_angle.html"
+      },
+      {
+        "title": "도형을 돌리며 보는 정사영",
+        "description": "S′ = S cosθ 정사영 도형을 돌리며 보는 정사영 바닥에 수직으로 내린 평행광이 만드는 그림자, 즉 정사영을 7가지 도형(정사면체·정육면체·구·반구·원·삼각형·선분)으로 직접 돌려보며 탐구합니다.",
+        "tags": [
+          "기하",
+          "수업활동"
+        ],
+        "url": "https://shootting.github.io/student-app/geometry/shadow_projection.html"
       }
     ],
     "백승욱": [
@@ -1116,8 +1125,8 @@ window.generatedTeacherTools = {
     },
     "정종엽": {
       "status": "success",
-      "count": 7,
-      "pagesVisited": 10,
+      "count": 8,
+      "pagesVisited": 11,
       "pageErrors": []
     },
     "백승욱": {
