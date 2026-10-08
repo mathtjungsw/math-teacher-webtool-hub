@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-10-06T14:46:28.010Z",
+  "generatedAt": "2026-10-08T15:15:19.813Z",
   "teachers": {
     "정승원": [
       {
@@ -184,6 +184,16 @@ window.generatedTeacherTools = {
           "수업활동"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-history/mathematician-story/index.html"
+      },
+      {
+        "title": "랜덤 위치 역사 탐험",
+        "description": "랜덤 위치 역사 탐험 육지 좌표를 추첨하고 출처 있는 연대 자료를 시간에 따라 탐험합니다. 속도·스킵·주변 8방향 비교와 자료 누적·재사용을 지원합니다.",
+        "tags": [
+          "기하",
+          "공학도구",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-history/random-location-history/index.html"
       },
       {
         "title": "수학 방탈출 제작기",
@@ -1119,8 +1129,8 @@ window.generatedTeacherTools = {
   "crawlStats": {
     "정승원": {
       "status": "success",
-      "count": 83,
-      "pagesVisited": 86,
+      "count": 84,
+      "pagesVisited": 87,
       "pageErrors": []
     },
     "정종엽": {
