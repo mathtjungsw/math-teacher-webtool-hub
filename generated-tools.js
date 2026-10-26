@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-10-13T15:37:00.664Z",
+  "generatedAt": "2026-10-26T14:52:54.823Z",
   "teachers": {
     "정승원": [
       {
@@ -1110,6 +1110,30 @@ window.generatedTeacherTools = {
           "접선"
         ],
         "url": "https://meerani-t.github.io/teaching-app-library/apps/differentiation-quest/index.html"
+      },
+      {
+        "title": "극값, 최대최소 형성평가",
+        "description": "함수의 증가와 감소, 극값과 최대·최소를 기본 문제와 도전 문제로 확인하는 게임형 형성평가입니다.",
+        "tags": [
+          "함수",
+          "게임형 수업",
+          "증가와 감소",
+          "극값",
+          "최대·최소"
+        ],
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/extrema-assessment/index.html"
+      },
+      {
+        "title": "방부등식, 속도가속도 형성평가",
+        "description": "미분을 활용한 방정식과 부등식, 속도와 가속도를 기본 문제와 도전 문제로 확인하는 게임형 형성평가입니다.",
+        "tags": [
+          "함수",
+          "게임형 수업",
+          "방정식",
+          "부등식",
+          "속도"
+        ],
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/equations-motion-assessment/index.html"
       }
     ],
     "김동우": [
@@ -1147,7 +1171,7 @@ window.generatedTeacherTools = {
     },
     "배미란": {
       "status": "success",
-      "count": 9,
+      "count": 11,
       "pagesVisited": 2,
       "pageErrors": []
     },
