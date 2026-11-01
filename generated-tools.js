@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-10-26T14:52:54.823Z",
+  "generatedAt": "2026-11-01T14:45:56.963Z",
   "teachers": {
     "정승원": [
       {
@@ -213,6 +213,15 @@ window.generatedTeacherTools = {
           "함수"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/calculus-board-game-maker/index.html"
+      },
+      {
+        "title": "부릉부릉 차고",
+        "description": "국산 자동차 사진 24장으로 차종과 출시연도를 각각 골라 함께 맞히고, 자동차 5문제마다 5분 단위 시계를 읽으며 경험치와 자동차를 모읍니다.",
+        "tags": [
+          "게임형 수업",
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/car-clock-garage/index.html"
       },
       {
         "title": "파이데이 미션랜드",
@@ -1153,8 +1162,8 @@ window.generatedTeacherTools = {
   "crawlStats": {
     "정승원": {
       "status": "success",
-      "count": 84,
-      "pagesVisited": 87,
+      "count": 85,
+      "pagesVisited": 88,
       "pageErrors": []
     },
     "정종엽": {
