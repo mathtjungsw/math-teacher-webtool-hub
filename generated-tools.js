@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-11-01T14:45:56.963Z",
+  "generatedAt": "2026-11-02T17:52:47.507Z",
   "teachers": {
     "정승원": [
       {
@@ -216,12 +216,12 @@ window.generatedTeacherTools = {
       },
       {
         "title": "부릉부릉 차고",
-        "description": "국산 자동차 사진 24장으로 차종과 출시연도를 각각 골라 함께 맞히고, 자동차 5문제마다 5분 단위 시계를 읽으며 경험치와 자동차를 모읍니다.",
+        "description": "국산차와 일본 경차 등 126개 차종 사진 240장으로 차종과 출시연도를 맞혀요. 자동차 5문제마다 시계 퀴즈를 풀고, 아이디만으로 이어서 차고를 키워요.",
         "tags": [
           "게임형 수업",
           "수업활동"
         ],
-        "url": "https://mathtjungsw.github.io/math-class-webtools/math-game/car-clock-garage/index.html"
+        "url": "https://script.google.com/macros/s/AKfycbzICkBqFPD5Xy4Jm25_xRXwE4KncSg7xjHAycgrM0h1SxoVgmoVCKNv38Zr392VgXw/exec"
       },
       {
         "title": "파이데이 미션랜드",
