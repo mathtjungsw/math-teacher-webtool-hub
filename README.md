@@ -39,6 +39,8 @@
 
 자동 탐색을 지원하지 않는 사이트는 `crawlDisabled: true`로 설정하고 `tools`에 검색용 항목을 직접 등록합니다.
 
+도구 목록을 JSON 배열로 공개하는 사이트는 `toolsJsonUrl`에 목록 주소를 지정할 수 있습니다. `title`, `url`, `description`, `course`, `unit`, `enabled` 값을 읽으며, 같은 URL의 중복 등록과 `enabled: false` 항목은 제외합니다.
+
 ## 자동 수집
 
 ```bash

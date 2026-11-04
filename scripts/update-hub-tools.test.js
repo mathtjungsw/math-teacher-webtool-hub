@@ -5,6 +5,7 @@ const {
   extractAppsFromJavaScript,
   extractCardToolsFromHtml,
   extractCandidatesFromHtml,
+  extractToolsFromRegistry,
   getCandidateKey,
   hasMeaningfulOutputChange,
   loadTeachers,
@@ -21,6 +22,21 @@ const teacher = {
   url: "https://example.com/",
   crawlUrl: "https://example.com/",
 };
+
+test("reads JSON registry tools, deduplicating course listings and rejecting disabled or unsafe links", () => {
+  const registry = [
+    { title: "이차함수 포트리스", course: "중3", url: "https://example.com/quadratic/", enabled: true },
+    { title: "이차함수 포트리스", course: "고1", url: "https://example.com/quadratic/", enabled: true },
+    { title: "파이데이 행사", url: "./pi.html", enabled: true },
+    { title: "Disabled", url: "./disabled.html", enabled: false },
+    { title: "Unsafe", url: "javascript:alert(1)" },
+  ];
+  const tools = extractToolsFromRegistry(registry, teacher, "https://example.com/tools.json");
+  assert.equal(tools.length, 2);
+  assert.ok(tools[0].tags.includes("함수"));
+  assert.equal(tools[1].url, "https://example.com/pi.html");
+  assert.throws(() => extractToolsFromRegistry({}, teacher, teacher.url), /must be an array/);
+});
 
 test("extracts a linked tool from a nested card", () => {
   const html = `

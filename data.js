@@ -95,6 +95,25 @@ const teachers = [
       },
     ],
   },
+  {
+    name: "조창환",
+    school: "거창덕유중학교",
+    description: "삼각형의 성질, 이차함수, 파이데이 활동을 탐구하는 온라인 수학 교구 모음입니다.",
+    tags: ["기하", "함수", "공학도구", "수업활동"],
+    url: "https://mathsetkk0102-cmyk.github.io/jopt-online-tools-main/",
+    crawlUrl: "https://mathsetkk0102-cmyk.github.io/jopt-online-tools-main/",
+    toolsJsonUrl: "https://mathsetkk0102-cmyk.github.io/jopt-online-tools-main/tools.json",
+    image: "",
+    imageAlt: "조창환 선생님 조PT의 온라인 교구 페이지 미리보기",
+    tools: [
+      {
+        title: "조PT의 온라인 교구",
+        description: "중학교와 고등학교 수학 수업에 활용하는 온라인 교구 모음입니다.",
+        tags: ["기하", "함수", "공학도구", "수업활동"],
+        url: "https://mathsetkk0102-cmyk.github.io/jopt-online-tools-main/",
+      },
+    ],
+  },
 ];
 
 const tagFilters = [

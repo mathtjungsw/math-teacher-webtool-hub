@@ -902,9 +902,43 @@ function mergeTool(tools, seen, tool) {
   tools.push(cleanTool);
 }
 
+function extractToolsFromRegistry(registry, teacher, registryUrl) {
+  if (!Array.isArray(registry)) throw new TypeError("Tool registry must be an array");
+  const tools = [];
+  const seen = new Set();
+
+  for (const item of registry) {
+    if (!item || item.enabled === false || typeof item.title !== "string" || !item.title.trim()) continue;
+    if (typeof item.url !== "string" || !item.url.trim()) continue;
+    const url = resolveHttpUrl(item.url, registryUrl);
+    if (!url) continue;
+    const description = normalizeText(item.description) || `${teacher.name} 선생님의 웹툴입니다.`;
+    const tags = inferTags(`${item.title} ${description} ${item.course || ""} ${item.unit || ""}`, teacher.tags);
+    if (/삼각형|외심|내심|무게중심/.test(`${item.title} ${item.unit || ""}`) && !tags.includes("기하")) tags.unshift("기하");
+    mergeTool(tools, seen, {
+      title: normalizeText(item.title),
+      description,
+      tags: tags.length ? tags : (teacher.tags || []).slice(0, 3),
+      url,
+    });
+  }
+
+  return tools;
+}
+
 async function crawlTeacherTools(teacher) {
   const crawlUrl = resolveHttpUrl(teacher.crawlUrl || teacher.url);
   if (!crawlUrl) throw new TypeError("Only HTTP and HTTPS crawl URLs are supported");
+  if (teacher.toolsJsonUrl) {
+    const registryUrl = resolveHttpUrl(teacher.toolsJsonUrl, crawlUrl);
+    if (!registryUrl) throw new TypeError("Only HTTP and HTTPS registry URLs are supported");
+    const registry = JSON.parse(await fetchHtml(registryUrl));
+    const tools = extractToolsFromRegistry(registry, teacher, registryUrl);
+    return {
+      tools,
+      stats: { status: "success", count: tools.length, pagesVisited: 1, pageErrors: [] },
+    };
+  }
   const queue = [{ url: crawlUrl, depth: 0, sourceCandidate: null }];
   const visited = new Set();
   const seenTools = new Set();
@@ -1143,6 +1177,7 @@ module.exports = {
   extractAppsFromJavaScript,
   extractCandidatesFromHtml,
   extractPageCandidates,
+  extractToolsFromRegistry,
   getCandidateKey,
   hasMeaningfulOutputChange,
   loadTeachers,
