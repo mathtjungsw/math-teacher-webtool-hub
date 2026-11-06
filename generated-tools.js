@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-11-04T03:26:26.530Z",
+  "generatedAt": "2026-11-06T00:47:35.094Z",
   "teachers": {
     "정승원": [
       {
@@ -1167,6 +1167,15 @@ window.generatedTeacherTools = {
         "url": "https://celebrated-granita-402942.netlify.app"
       },
       {
+        "title": "일차함수 탐구",
+        "description": "기울기와 y절편의 변화 탐구",
+        "tags": [
+          "함수",
+          "수업활동"
+        ],
+        "url": "https://mathsetkk0102-cmyk.github.io/jopt-online-tools-main/jopt_linear_function_explorer.html"
+      },
+      {
         "title": "이차함수 포트리스",
         "description": "이차함수 그래프 · 포물선",
         "tags": [
@@ -1207,7 +1216,7 @@ window.generatedTeacherTools = {
     "배미란": {
       "status": "success",
       "count": 11,
-      "pagesVisited": 2,
+      "pagesVisited": 1,
       "pageErrors": []
     },
     "김동우": {
@@ -1219,7 +1228,7 @@ window.generatedTeacherTools = {
     },
     "조창환": {
       "status": "success",
-      "count": 3,
+      "count": 4,
       "pagesVisited": 1,
       "pageErrors": []
     }
