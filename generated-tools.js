@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-11-06T00:47:35.094Z",
+  "generatedAt": "2026-11-10T02:33:43.692Z",
   "teachers": {
     "정승원": [
       {
@@ -1143,6 +1143,17 @@ window.generatedTeacherTools = {
           "속도"
         ],
         "url": "https://meerani-t.github.io/teaching-app-library/apps/equations-motion-assessment/index.html"
+      },
+      {
+        "title": "부정적분, 정적분 형성평가",
+        "description": "부정적분과 정적분을 기본 9문제와 도전 6문제로 연습하는 형성평가입니다.",
+        "tags": [
+          "함수",
+          "부정적분",
+          "정적분",
+          "형성평가"
+        ],
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/integral-assessment/index.html"
       }
     ],
     "김동우": [
@@ -1215,7 +1226,7 @@ window.generatedTeacherTools = {
     },
     "배미란": {
       "status": "success",
-      "count": 11,
+      "count": 12,
       "pagesVisited": 1,
       "pageErrors": []
     },
