@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-11-10T02:33:43.692Z",
+  "generatedAt": "2026-11-13T15:56:11.215Z",
   "teachers": {
     "정승원": [
       {
@@ -1154,6 +1154,18 @@ window.generatedTeacherTools = {
           "형성평가"
         ],
         "url": "https://meerani-t.github.io/teaching-app-library/apps/integral-assessment/index.html"
+      },
+      {
+        "title": "넓이, 속도와 거리 형성평가",
+        "description": "기본 9문제와 도전 6문제로 곡선 사이의 넓이, 위치의 변화량, 움직인 거리를 구합니다.",
+        "tags": [
+          "함수",
+          "정적분",
+          "넓이",
+          "속도",
+          "거리"
+        ],
+        "url": "https://meerani-t.github.io/teaching-app-library/apps/area-motion-assessment/index.html"
       }
     ],
     "김동우": [
@@ -1226,7 +1238,7 @@ window.generatedTeacherTools = {
     },
     "배미란": {
       "status": "success",
-      "count": 12,
+      "count": 13,
       "pagesVisited": 1,
       "pageErrors": []
     },
