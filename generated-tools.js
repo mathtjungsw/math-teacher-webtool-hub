@@ -1,5 +1,5 @@
 window.generatedTeacherTools = {
-  "generatedAt": "2026-11-13T15:56:11.215Z",
+  "generatedAt": "2026-11-20T01:40:04.462Z",
   "teachers": {
     "정승원": [
       {
@@ -870,6 +870,14 @@ window.generatedTeacherTools = {
           "공학도구"
         ],
         "url": "https://mathtjungsw.github.io/math-class-webtools/school-work/video-compressor"
+      },
+      {
+        "title": "학급 응답 모으기",
+        "description": "활동 코드를 나눠주고 학생이 제출한 응답을 모아 선택 분포, 평균, 서술 답안을 확인하세요.",
+        "tags": [
+          "수업활동"
+        ],
+        "url": "https://mathtjungsw.github.io/math-class-webtools/classroom-response/poll"
       }
     ],
     "정종엽": [
@@ -1220,8 +1228,8 @@ window.generatedTeacherTools = {
   "crawlStats": {
     "정승원": {
       "status": "success",
-      "count": 85,
-      "pagesVisited": 88,
+      "count": 86,
+      "pagesVisited": 89,
       "pageErrors": []
     },
     "정종엽": {
